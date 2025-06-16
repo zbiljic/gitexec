@@ -249,19 +249,11 @@ func (g *Generator) generateOptionChecks(cmd CommandDoc) []jen.Code {
 				))
 			}
 		case strings.Contains(opt.Argument, "<n>"):
-			optName := strings.Split(opt.Argument, "<n>")[0]
-			optName = strings.ReplaceAll(optName, "[", "")
-			statements = append(statements, jen.If(jen.Id("opts").Dot(fieldName).Op(">").Lit(0)).Block(
-				jen.Id("args").Op("=").Id("append").Call(
-					jen.Id("args"),
-					jen.Qual("fmt", "Sprintf").Call(
-						jen.Lit(optName+"%d"),
-						jen.Id("opts").Dot(fieldName),
-					),
-				),
-			))
+			fallthrough
 		case strings.Contains(opt.Argument, "<num>"):
-			optName := strings.Split(opt.Argument, "<num>")[0]
+			fallthrough
+		case strings.Contains(opt.Argument, "<number>"):
+			optName := strings.Split(opt.Argument, "<n")[0]
 			optName = strings.ReplaceAll(optName, "[", "")
 			statements = append(statements, jen.If(jen.Id("opts").Dot(fieldName).Op(">").Lit(0)).Block(
 				jen.Id("args").Op("=").Id("append").Call(
@@ -438,7 +430,9 @@ func determineFieldType(option string) string {
 	}
 
 	// Options with values are represented as numbers
-	if strings.Contains(option, "<n>") || strings.Contains(option, "<num>") {
+	if strings.Contains(option, "<n>") ||
+		strings.Contains(option, "<num>") ||
+		strings.Contains(option, "<number>") {
 		return "uint64"
 	}
 
