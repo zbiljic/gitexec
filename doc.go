@@ -15,3 +15,5 @@
 // constraints, ensuring proper process management on both Unix and Windows
 // systems.
 package gitexec
+
+//go:generate /bin/sh -c "cd ./internal/generator && go run main.go -output ../.. ../../docs/git"
