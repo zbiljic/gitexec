@@ -388,7 +388,7 @@
             "description": "Override a previous --no-walk and resume normal ancestry traversal."
         },
         {
-            "argument": "--pretty[=<format>]",
+            "argument": "--format=<format>",
             "arguments": "--pretty[=<format>], --format=<format>",
             "description": "Pretty-print commits using formats such as oneline, short, medium, full, fuller, reference, email, raw, format:<string> or tformat:<string>."
         },

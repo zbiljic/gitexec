@@ -258,11 +258,6 @@
             "description": "Show progress reports on stderr as objects are considered."
         },
         {
-            "argument": "<paths>",
-            "arguments": "<paths>",
-            "description": "Commits modifying the given <paths> are selected."
-        },
-        {
             "argument": "--simplify-by-decoration",
             "arguments": "--simplify-by-decoration",
             "description": "Commits that are referred by some branch or tag are selected."
@@ -516,6 +511,21 @@
             "argument": "--count",
             "arguments": "--count",
             "description": "Print a number stating how many commits would have been listed, and suppress all other output."
+        },
+        {
+            "argument": "<commit>",
+            "arguments": "<commit>",
+            "description": "The commit to compare against. If not specified, the working tree is compared against HEAD."
+        },
+        {
+            "argument": "--",
+            "arguments": "--",
+            "description": "Do not interpret any more arguments as options."
+        },
+        {
+            "argument": "<path>...",
+            "arguments": "<path>...",
+            "description": "Commits modifying the given <paths> are selected."
         }
     ]
 }
