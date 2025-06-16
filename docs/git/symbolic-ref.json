@@ -1,0 +1,46 @@
+{
+    "command_name": "symbolic-ref",
+    "description": "Read, create, or delete symbolic refs",
+    "options": [
+        {
+            "argument": "--delete",
+            "arguments": "-d, --delete",
+            "description": "Delete the symbolic ref <name>."
+        },
+        {
+            "argument": "--quiet",
+            "arguments": "-q, --quiet",
+            "description": "Do not issue an error message if the <name> is not a symbolic ref but a detached HEAD; instead exit with status 1 silently."
+        },
+        {
+            "argument": "--short",
+            "arguments": "--short",
+            "description": "When showing a symbolic ref, try to shorten it as a relative ref."
+        },
+        {
+            "argument": "--recurse",
+            "arguments": "--recurse",
+            "description": "When showing the value of <name> as a symbolic ref, if <name> refers to another symbolic ref, follow such a chain of symbolic refs until the result no longer points at a symbolic ref."
+        },
+        {
+            "argument": "--no-recurse",
+            "arguments": "--no-recurse",
+            "description": "When showing the value of <name> as a symbolic ref, if <name> refers to another symbolic ref, stop after dereferencing only a single level of symbolic ref."
+        },
+        {
+            "argument": "-m <reason>",
+            "arguments": "-m <reason>",
+            "description": "Update the reflog for <name> with <reason>. This is valid only when creating or updating a symbolic ref."
+        },
+        {
+            "argument": "<name>",
+            "arguments": "<name>",
+            "description": "The name of the symbolic ref to read, create, or delete. For example HEAD."
+        },
+        {
+            "argument": "<ref>",
+            "arguments": "<ref>",
+            "description": "The target of the symbolic ref. For example refs/heads/master."
+        }
+    ]
+}

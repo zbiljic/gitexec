@@ -1,0 +1,206 @@
+{
+    "command_name": "branch",
+    "description": "List, create, or delete branches",
+    "options": [
+        {
+            "argument": "--delete",
+            "arguments": "-d, --delete",
+            "description": "Delete a branch. The branch must be fully merged in its upstream branch, or in HEAD if no upstream was set."
+        },
+        {
+            "argument": "-D",
+            "arguments": "-D",
+            "description": "Shortcut for --delete --force."
+        },
+        {
+            "argument": "--create-reflog",
+            "arguments": "--create-reflog",
+            "description": "Create the branch's reflog. This activates recording of all changes made to the branch ref, enabling use of date based sha1 expressions such as \"<branchname>@{yesterday}\"."
+        },
+        {
+            "argument": "--force",
+            "arguments": "-f, --force",
+            "description": "Reset <branchname> to <startpoint>, even if <branchname> exists already. Without -f, git branch refuses to change an existing branch."
+        },
+        {
+            "argument": "--move",
+            "arguments": "-m, --move",
+            "description": "Move/rename a branch and the corresponding reflog."
+        },
+        {
+            "argument": "-M",
+            "arguments": "-M",
+            "description": "Shortcut for --move --force."
+        },
+        {
+            "argument": "--copy",
+            "arguments": "-c, --copy",
+            "description": "Copy a branch and the corresponding reflog."
+        },
+        {
+            "argument": "-C",
+            "arguments": "-C",
+            "description": "Shortcut for --copy --force."
+        },
+        {
+            "argument": "--color[=<when>]",
+            "arguments": "--color[=<when>]",
+            "description": "Color branches to highlight current, local, and remote branches."
+        },
+        {
+            "argument": "--no-color",
+            "arguments": "--no-color",
+            "description": "Turn off branch coloring, even when the configuration file gives the default to color output."
+        },
+        {
+            "argument": "--ignore-case",
+            "arguments": "-i, --ignore-case",
+            "description": "Sorting and filtering branches are case insensitive."
+        },
+        {
+            "argument": "--omit-empty",
+            "arguments": "--omit-empty",
+            "description": "Do not print a newline after formatted refs where the format expands to the empty string."
+        },
+        {
+            "argument": "--column[=<options>]",
+            "arguments": "--column[=<options>]",
+            "description": "Display branch listing in columns."
+        },
+        {
+            "argument": "--no-column",
+            "arguments": "--no-column",
+            "description": "Do not display branch listing in columns."
+        },
+        {
+            "argument": "--remotes",
+            "arguments": "-r, --remotes",
+            "description": "List or delete (if used with -d) remote-tracking branches."
+        },
+        {
+            "argument": "--all",
+            "arguments": "-a, --all",
+            "description": "List both local and remote-tracking branches."
+        },
+        {
+            "argument": "--list",
+            "arguments": "--list",
+            "description": "List branches. With --list, the command may be interpreted as branch creation if <pattern> is not provided."
+        },
+        {
+            "argument": "--show-current",
+            "arguments": "--show-current",
+            "description": "Print the name of the current branch."
+        },
+        {
+            "argument": "--verbose",
+            "arguments": "-v, --verbose",
+            "description": "Show SHA-1 and commit subject line for each head, along with relationship to upstream branch (if any). If given twice, print the path of the linked worktree (if any) and the name of the upstream branch, as well (if any)."
+        },
+        {
+            "argument": "--quiet",
+            "arguments": "-q, --quiet",
+            "description": "Be more quiet when creating or deleting a branch, suppressing non-error messages."
+        },
+        {
+            "argument": "--abbrev=<n>",
+            "arguments": "--abbrev=<n>",
+            "description": "Alter the sha1s minimum display length in the output listing. The default value is 7 and can be overridden by the core.abbrev config option."
+        },
+        {
+            "argument": "--no-abbrev",
+            "arguments": "--no-abbrev",
+            "description": "Display the full sha1s in the output listing rather than abbreviating them."
+        },
+        {
+            "argument": "--track[=(direct|inherit)]",
+            "arguments": "--track[=(direct|inherit)]",
+            "description": "When creating a new branch, set up branch.<name>.remote and branch.<name>.merge configuration entries to mark the start-point as 'upstream' from the new branch."
+        },
+        {
+            "argument": "--no-track",
+            "arguments": "--no-track",
+            "description": "Do not set up 'upstream' configuration, even if the branch.autoSetupMerge configuration variable is true."
+        },
+        {
+            "argument": "--recurse-submodules",
+            "arguments": "--recurse-submodules",
+            "description": "THIS OPTION IS EXPERIMENTAL! Causes the current command to recurse into submodules."
+        },
+        {
+            "argument": "--set-upstream-to=<upstream>",
+            "arguments": "-u <upstream>, --set-upstream-to=<upstream>",
+            "description": "Set up <branchname>'s tracking information."
+        },
+        {
+            "argument": "--unset-upstream",
+            "arguments": "--unset-upstream",
+            "description": "Remove the upstream information for <branchname>. If no branch is specified it defaults to the current branch."
+        },
+        {
+            "argument": "--edit-description",
+            "arguments": "--edit-description",
+            "description": "Open an editor and edit the text to explain what the branch is for."
+        },
+        {
+            "argument": "--contains [<commit>]",
+            "arguments": "--contains [<commit>]",
+            "description": "Only list branches which contain the specified commit (HEAD if not specified)."
+        },
+        {
+            "argument": "--no-contains [<commit>]",
+            "arguments": "--no-contains [<commit>]",
+            "description": "Only list branches which don't contain the specified commit (HEAD if not specified)."
+        },
+        {
+            "argument": "--merged [<commit>]",
+            "arguments": "--merged [<commit>]",
+            "description": "Only list branches whose tips are reachable from the specified commit (HEAD if not specified)."
+        },
+        {
+            "argument": "--no-merged [<commit>]",
+            "arguments": "--no-merged [<commit>]",
+            "description": "Only list branches whose tips are not reachable from the specified commit (HEAD if not specified)."
+        },
+        {
+            "argument": "<branchname>",
+            "arguments": "<branchname>",
+            "description": "The name of the branch to create or delete. The new branch name must pass all checks defined by git-check-ref-format."
+        },
+        {
+            "argument": "<start-point>",
+            "arguments": "<start-point>",
+            "description": "The new branch head will point to this commit. It may be given as a branch name, a commit-id, or a tag."
+        },
+        {
+            "argument": "<oldbranch>",
+            "arguments": "<oldbranch>",
+            "description": "The name of an existing branch to rename."
+        },
+        {
+            "argument": "<newbranch>",
+            "arguments": "<newbranch>",
+            "description": "The new name for an existing branch. The same restrictions as for <branchname> apply."
+        },
+        {
+            "argument": "--sort=<key>",
+            "arguments": "--sort=<key>",
+            "description": "Sort based on the key given. Prefix - to sort in descending order of the value. You may use the --sort=<key> option multiple times, in which case the last key becomes the primary key."
+        },
+        {
+            "argument": "--points-at <object>",
+            "arguments": "--points-at <object>",
+            "description": "Only list branches of the given object."
+        },
+        {
+            "argument": "--format <format>",
+            "arguments": "--format <format>",
+            "description": "A string that interpolates %(fieldname) from a branch ref being shown and the object it points at. The format is the same as that of git-for-each-ref."
+        },
+        {
+            "argument": "<pattern>...",
+            "arguments": "<pattern>...",
+            "description": "Shell wildcard patterns to restrict the output to matching branches. If multiple patterns are given, a branch is shown if it matches any of the patterns."
+        }
+    ]
+}

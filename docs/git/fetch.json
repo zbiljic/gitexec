@@ -1,0 +1,261 @@
+{
+    "command_name": "fetch",
+    "description": "Download objects and refs from another repository",
+    "options": [
+        {
+            "argument": "--all",
+            "arguments": "--all",
+            "description": "Fetch all remotes, except for the ones that has the remote.<name>.skipFetchAll configuration variable set."
+        },
+        {
+            "argument": "--no-all",
+            "arguments": "--no-all",
+            "description": "Override the configuration variable fetch.all, which when set to true fetches all remotes."
+        },
+        {
+            "argument": "--append",
+            "arguments": "-a, --append",
+            "description": "Append ref names and object names of fetched refs to the existing contents of .git/FETCH_HEAD."
+        },
+        {
+            "argument": "--atomic",
+            "arguments": "--atomic",
+            "description": "Use an atomic transaction to update local refs. Either all refs are updated, or on error, no refs are updated."
+        },
+        {
+            "argument": "--depth=<depth>",
+            "arguments": "--depth=<depth>",
+            "description": "Limit fetching to the specified number of commits from the tip of each remote branch history."
+        },
+        {
+            "argument": "--deepen=<depth>",
+            "arguments": "--deepen=<depth>",
+            "description": "Similar to --depth, except it specifies the number of commits from the current shallow boundary instead of from the tip of each remote branch history."
+        },
+        {
+            "argument": "--shallow-since=<date>",
+            "arguments": "--shallow-since=<date>",
+            "description": "Deepen or shorten the history of a shallow repository to include all reachable commits after <date>."
+        },
+        {
+            "argument": "--shallow-exclude=<ref>",
+            "arguments": "--shallow-exclude=<ref>",
+            "description": "Deepen or shorten the history of a shallow repository to exclude commits reachable from a specified remote branch or tag."
+        },
+        {
+            "argument": "--unshallow",
+            "arguments": "--unshallow",
+            "description": "If the source repository is complete, convert a shallow repository to a complete one by removing all the limitations imposed by shallow repositories."
+        },
+        {
+            "argument": "--update-shallow",
+            "arguments": "--update-shallow",
+            "description": "Update .git/shallow for the current shallow repository to include what is fetched."
+        },
+        {
+            "argument": "--negotiation-tip=<commit|glob>",
+            "arguments": "--negotiation-tip=<commit|glob>",
+            "description": "By default, Git will report all reachable commits from its local refs when asking a remote what commits it needs to complete a fetch."
+        },
+        {
+            "argument": "--negotiate-only",
+            "arguments": "--negotiate-only",
+            "description": "Do not actually fetch, but only print the hashes of commits the client has and the server needs."
+        },
+        {
+            "argument": "--dry-run",
+            "arguments": "--dry-run",
+            "description": "Show what would be done, without making any changes."
+        },
+        {
+            "argument": "--write-fetch-head",
+            "arguments": "--write-fetch-head",
+            "description": "Write the list of remote refs fetched in the FETCH_HEAD file directly under $GIT_DIR."
+        },
+        {
+            "argument": "--no-write-fetch-head",
+            "arguments": "--no-write-fetch-head",
+            "description": "Tells Git not to write the updated refs in the FETCH_HEAD file."
+        },
+        {
+            "argument": "--force",
+            "arguments": "-f, --force",
+            "description": "When git fetch is used with <src>:<dst> refspec it may refuse to update the local branch which is not an ancestor of the remote branch. This option overrides that check."
+        },
+        {
+            "argument": "--keep",
+            "arguments": "-k, --keep",
+            "description": "Keep downloaded pack."
+        },
+        {
+            "argument": "--multiple",
+            "arguments": "--multiple",
+            "description": "Allow several <repository> and <group> arguments to be specified. No <refspec>s may be specified."
+        },
+        {
+            "argument": "--auto-maintenance",
+            "arguments": "--auto-maintenance",
+            "description": "Run 'git maintenance run --auto' after fetching."
+        },
+        {
+            "argument": "--no-auto-maintenance",
+            "arguments": "--no-auto-maintenance",
+            "description": "Don't run 'git maintenance run --auto' after fetching."
+        },
+        {
+            "argument": "--auto-gc",
+            "arguments": "--auto-gc",
+            "description": "Run 'git gc --auto' after fetching."
+        },
+        {
+            "argument": "--no-auto-gc",
+            "arguments": "--no-auto-gc",
+            "description": "Don't run 'git gc --auto' after fetching."
+        },
+        {
+            "argument": "--write-commit-graph",
+            "arguments": "--write-commit-graph",
+            "description": "Write a commit-graph after fetching."
+        },
+        {
+            "argument": "--no-write-commit-graph",
+            "arguments": "--no-write-commit-graph",
+            "description": "Don't write a commit-graph after fetching."
+        },
+        {
+            "argument": "--prefetch",
+            "arguments": "--prefetch",
+            "description": "Modify the configured refspec to place all refs into the refs/prefetch/ namespace."
+        },
+        {
+            "argument": "--prune",
+            "arguments": "-p, --prune",
+            "description": "Before fetching, remove any remote-tracking references that no longer exist on the remote."
+        },
+        {
+            "argument": "--prune-tags",
+            "arguments": "-P, --prune-tags",
+            "description": "Before fetching, remove any local tags that no longer exist on the remote if --prune is enabled."
+        },
+        {
+            "argument": "--no-tags",
+            "arguments": "-n, --no-tags",
+            "description": "By default, tags are fetched automatically if the remote helps us to determine which objects would be transfered if we fetch from the remote branches."
+        },
+        {
+            "argument": "--refetch",
+            "arguments": "--refetch",
+            "description": "Instead of negotiating with the server to avoid transferring commits and associated objects that are already present locally, this option fetches all objects as a fresh clone would."
+        },
+        {
+            "argument": "--refmap=<refspec>",
+            "arguments": "--refmap=<refspec>",
+            "description": "When fetching refs listed on the command line, use the specified refspec to map the refs to remote-tracking branches."
+        },
+        {
+            "argument": "--tags",
+            "arguments": "-t, --tags",
+            "description": "Fetch all tags from the remote (i.e., fetch remote tags refs/tags/* into local tags with the same name)."
+        },
+        {
+            "argument": "--recurse-submodules[=(yes|on-demand|no)]",
+            "arguments": "--recurse-submodules[=(yes|on-demand|no)]",
+            "description": "This option controls if and under what conditions new commits of populated submodules should be fetched too."
+        },
+        {
+            "argument": "--jobs=<n>",
+            "arguments": "-j, --jobs=<n>",
+            "description": "Number of parallel children to be used for fetching submodules."
+        },
+        {
+            "argument": "--no-recurse-submodules",
+            "arguments": "--no-recurse-submodules",
+            "description": "Disable recursive fetching of submodules."
+        },
+        {
+            "argument": "--set-upstream",
+            "arguments": "-u, --set-upstream",
+            "description": "If the remote is fetched successfully, add upstream (tracking) reference."
+        },
+        {
+            "argument": "--submodule-prefix=<path>",
+            "arguments": "--submodule-prefix=<path>",
+            "description": "Prepend <path> to paths printed in informative messages such as 'Fetching submodule foo'."
+        },
+        {
+            "argument": "--recurse-submodules-default=[yes|on-demand]",
+            "arguments": "--recurse-submodules-default=[yes|on-demand]",
+            "description": "This option sets the default value for the --recurse-submodules option."
+        },
+        {
+            "argument": "--update-head-ok",
+            "arguments": "-u, --update-head-ok",
+            "description": "By default git fetch refuses to update the head which corresponds to the current branch."
+        },
+        {
+            "argument": "--upload-pack <upload-pack>",
+            "arguments": "--upload-pack <upload-pack>",
+            "description": "When given, and the repository to fetch from is accessed via ssh, this specifies a non-default path for the command run on the other end."
+        },
+        {
+            "argument": "--quiet",
+            "arguments": "-q, --quiet",
+            "description": "Progress status is reported on the standard error stream by default, suppress it."
+        },
+        {
+            "argument": "--verbose",
+            "arguments": "-v, --verbose",
+            "description": "Be verbose."
+        },
+        {
+            "argument": "--progress",
+            "arguments": "--progress",
+            "description": "Progress status is reported on the standard error stream by default, but this flag forces progress status even if the error stream is not directed to a terminal."
+        },
+        {
+            "argument": "--server-option=<option>",
+            "arguments": "-o, --server-option=<option>",
+            "description": "Transmit the given string to the server when communicating using protocol version 2."
+        },
+        {
+            "argument": "--show-forced-updates",
+            "arguments": "--show-forced-updates",
+            "description": "By default, git fetch prints forced updates with a different preceding symbol than normal updates."
+        },
+        {
+            "argument": "--no-show-forced-updates",
+            "arguments": "--no-show-forced-updates",
+            "description": "Do not print forced updates."
+        },
+        {
+            "argument": "--ipv4",
+            "arguments": "-4, --ipv4",
+            "description": "Use IPv4 addresses only, ignoring IPv6 addresses."
+        },
+        {
+            "argument": "--ipv6",
+            "arguments": "-6, --ipv6",
+            "description": "Use IPv6 addresses only, ignoring IPv4 addresses."
+        },
+        {
+            "argument": "<repository>",
+            "arguments": "<repository>",
+            "description": "The \"remote\" repository that is the source of a fetch or pull operation."
+        },
+        {
+            "argument": "<group>",
+            "arguments": "<group>",
+            "description": "A name referring to a list of repositories as the value of remotes.<group> in the configuration file."
+        },
+        {
+            "argument": "<refspec>",
+            "arguments": "<refspec>",
+            "description": "Specifies which refs to fetch and which local refs to update."
+        },
+        {
+            "argument": "--stdin",
+            "arguments": "--stdin",
+            "description": "Read refspecs from stdin in addition to those provided as arguments."
+        }
+    ]
+}

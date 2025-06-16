@@ -1,0 +1,176 @@
+{
+    "command_name": "clone",
+    "description": "Clone a repository into a new directory",
+    "options": [
+        {
+            "argument": "--template=<template-directory>",
+            "arguments": "--template=<template-directory>",
+            "description": "Specify the directory from which templates will be used."
+        },
+        {
+            "argument": "--local",
+            "arguments": "-l, --local",
+            "description": "When the repository to clone from is on a local machine, this flag bypasses the normal 'Git aware' transport mechanism and clones the repository by making a copy of HEAD and everything under objects and refs directories."
+        },
+        {
+            "argument": "--shared",
+            "arguments": "-s, --shared",
+            "description": "Set up the new repository to share the object database with the cloned repository."
+        },
+        {
+            "argument": "--no-hardlinks",
+            "arguments": "--no-hardlinks",
+            "description": "Force the cloning process from a repository on a local filesystem to copy the files under the .git/objects directory instead of using hardlinks."
+        },
+        {
+            "argument": "--quiet",
+            "arguments": "-q, --quiet",
+            "description": "Operate quietly. Progress is not reported to the standard error stream."
+        },
+        {
+            "argument": "--verbose",
+            "arguments": "-v, --verbose",
+            "description": "Run verbosely. Does not affect the reporting of progress status to the standard error stream."
+        },
+        {
+            "argument": "--no-checkout",
+            "arguments": "-n, --no-checkout",
+            "description": "No checkout of HEAD is performed after the clone is complete."
+        },
+        {
+            "argument": "--bare",
+            "arguments": "--bare",
+            "description": "Make a bare Git repository. That is, instead of creating <directory> and placing the administrative files in <directory>/.git, make the <directory> itself the $GIT_DIR."
+        },
+        {
+            "argument": "--mirror",
+            "arguments": "--mirror",
+            "description": "Set up a mirror of the source repository. This implies --bare."
+        },
+        {
+            "argument": "--origin <name>",
+            "arguments": "-o <name>, --origin <name>",
+            "description": "Instead of using the remote name origin to keep track of the upstream repository, use <name>."
+        },
+        {
+            "argument": "--branch <name>",
+            "arguments": "-b <name>, --branch <name>",
+            "description": "Instead of pointing the newly created HEAD to the branch pointed to by the cloned repository's HEAD, point to <name> branch instead."
+        },
+        {
+            "argument": "--upload-pack <upload-pack>",
+            "arguments": "-u <upload-pack>, --upload-pack <upload-pack>",
+            "description": "When given, and the repository to clone from is accessed via ssh, this specifies a non-default path for the command run on the other end."
+        },
+        {
+            "argument": "--reference <repository>",
+            "arguments": "--reference <repository>",
+            "description": "If the reference repository is on the local machine, automatically setup .git/objects/info/alternates to obtain objects from the reference repository."
+        },
+        {
+            "argument": "--reference-if-able <repository>",
+            "arguments": "--reference-if-able <repository>",
+            "description": "If the reference repository is on the local machine, automatically setup .git/objects/info/alternates to obtain objects from the reference repository, but only if the reference repository exists."
+        },
+        {
+            "argument": "--dissociate",
+            "arguments": "--dissociate",
+            "description": "Borrow the objects from reference repositories specified with the --reference options only to reduce network transfer, and stop borrowing from them after a clone is made by making necessary local copies of borrowed objects."
+        },
+        {
+            "argument": "--separate-git-dir=<git-dir>",
+            "arguments": "--separate-git-dir=<git-dir>",
+            "description": "Instead of placing the cloned repository where it is supposed to be, place the cloned repository at the specified directory, then make a filesystem-agnostic Git symbolic link to there."
+        },
+        {
+            "argument": "--depth <depth>",
+            "arguments": "--depth <depth>",
+            "description": "Create a shallow clone with a history truncated to the specified number of commits."
+        },
+        {
+            "argument": "--shallow-since=<date>",
+            "arguments": "--shallow-since=<date>",
+            "description": "Create a shallow clone with a history after the specified time."
+        },
+        {
+            "argument": "--shallow-exclude=<revision>",
+            "arguments": "--shallow-exclude=<revision>",
+            "description": "Create a shallow clone with a history, excluding commits reachable from a specified remote branch or tag."
+        },
+        {
+            "argument": "--single-branch",
+            "arguments": "--single-branch",
+            "description": "Clone only the history leading to the tip of a single branch, either specified by the --branch option or the primary branch remote's HEAD points at."
+        },
+        {
+            "argument": "--no-single-branch",
+            "arguments": "--no-single-branch",
+            "description": "Override the --single-branch option to fetch the histories near the tips of all branches."
+        },
+        {
+            "argument": "--no-tags",
+            "arguments": "--no-tags",
+            "description": "Don't clone any tags, and set remote.<remote>.tagOpt=--no-tags in the config file."
+        },
+        {
+            "argument": "--recurse-submodules[=<pathspec>]",
+            "arguments": "--recurse-submodules[=<pathspec>]",
+            "description": "After the clone is created, initialize and clone submodules within based on the provided pathspec."
+        },
+        {
+            "argument": "--shallow-submodules",
+            "arguments": "--shallow-submodules",
+            "description": "All submodules which are cloned will be shallow with a depth of 1."
+        },
+        {
+            "argument": "--no-shallow-submodules",
+            "arguments": "--no-shallow-submodules",
+            "description": "Disable the --shallow-submodules option."
+        },
+        {
+            "argument": "--remote-submodules",
+            "arguments": "--remote-submodules",
+            "description": "All submodules which are cloned will use the status of the submodule's remote-tracking branch to update the submodule."
+        },
+        {
+            "argument": "--no-remote-submodules",
+            "arguments": "--no-remote-submodules",
+            "description": "Use the status of the submodule's head to update the submodule."
+        },
+        {
+            "argument": "--jobs <n>",
+            "arguments": "-j <n>, --jobs <n>",
+            "description": "The number of submodules fetched at the same time."
+        },
+        {
+            "argument": "--sparse",
+            "arguments": "--sparse",
+            "description": "Initialize the sparse-checkout file so the working directory starts with only the files in the root of the repository."
+        },
+        {
+            "argument": "--filter=<filter-spec>",
+            "arguments": "--filter=<filter-spec>",
+            "description": "Use the partial clone feature and request that the server sends a subset of reachable objects according to the specified filter."
+        },
+        {
+            "argument": "--also-filter-submodules",
+            "arguments": "--also-filter-submodules",
+            "description": "When cloning with --filter, also apply the partial clone filter to any submodules in the repository."
+        },
+        {
+            "argument": "--reject-shallow",
+            "arguments": "--reject-shallow",
+            "description": "Fail if the source repository is a shallow repository."
+        },
+        {
+            "argument": "--no-reject-shallow",
+            "arguments": "--no-reject-shallow",
+            "description": "Overrides the --reject-shallow option."
+        },
+        {
+            "argument": "--bundle-uri=<uri>",
+            "arguments": "--bundle-uri=<uri>",
+            "description": "Before fetching from the remote, fetch a bundle from the given URI and unbundle the data into the local repository."
+        }
+    ]
+}

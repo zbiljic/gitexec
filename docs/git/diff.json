@@ -1,0 +1,461 @@
+{
+    "command_name": "diff",
+    "description": "Show changes between commits, commit and working tree, etc",
+    "options": [
+        {
+            "argument": "--patch",
+            "arguments": "-p, -u, --patch",
+            "description": "Generate patch (see Generating patch text with -p). This is the default."
+        },
+        {
+            "argument": "--no-patch",
+            "arguments": "-s, --no-patch",
+            "description": "Suppress all output from the diff machinery. Useful for commands like git show that show the patch by default to squelch their output, or to cancel the effect of options like --patch, --stat earlier on the command line in an alias."
+        },
+        {
+            "argument": "--unified=<n>",
+            "arguments": "-U<n>, --unified=<n>",
+            "description": "Generate diffs with <n> lines of context instead of the usual three. Implies --patch."
+        },
+        {
+            "argument": "--output=<file>",
+            "arguments": "--output=<file>",
+            "description": "Output to a specific file instead of stdout."
+        },
+        {
+            "argument": "--output-indicator-new=<char>",
+            "arguments": "--output-indicator-new=<char>",
+            "description": "Specify the character used to indicate new lines in the generated patch. Normally it is +."
+        },
+        {
+            "argument": "--output-indicator-old=<char>",
+            "arguments": "--output-indicator-old=<char>",
+            "description": "Specify the character used to indicate old lines in the generated patch. Normally it is -."
+        },
+        {
+            "argument": "--output-indicator-context=<char>",
+            "arguments": "--output-indicator-context=<char>",
+            "description": "Specify the character used to indicate context lines in the generated patch. Normally it is ' '."
+        },
+        {
+            "argument": "--raw",
+            "arguments": "--raw",
+            "description": "Generate the diff in raw format."
+        },
+        {
+            "argument": "--patch-with-raw",
+            "arguments": "--patch-with-raw",
+            "description": "Synonym for -p --raw."
+        },
+        {
+            "argument": "--indent-heuristic",
+            "arguments": "--indent-heuristic",
+            "description": "Enable the heuristic that shifts diff hunk boundaries to make patches easier to read. This is the default."
+        },
+        {
+            "argument": "--no-indent-heuristic",
+            "arguments": "--no-indent-heuristic",
+            "description": "Disable the indent heuristic."
+        },
+        {
+            "argument": "--minimal",
+            "arguments": "--minimal",
+            "description": "Spend extra time to make sure the smallest possible diff is produced."
+        },
+        {
+            "argument": "--patience",
+            "arguments": "--patience",
+            "description": "Generate a diff using the \"patience diff\" algorithm."
+        },
+        {
+            "argument": "--histogram",
+            "arguments": "--histogram",
+            "description": "Generate a diff using the \"histogram diff\" algorithm."
+        },
+        {
+            "argument": "--anchored=<text>",
+            "arguments": "--anchored=<text>",
+            "description": "Generate a diff using the \"anchored diff\" algorithm. This option may be specified more than once."
+        },
+        {
+            "argument": "--diff-algorithm=<algorithm>",
+            "arguments": "--diff-algorithm=(patience|minimal|histogram|myers|default)",
+            "description": "Choose a diff algorithm. Variants: myers (default), minimal, patience, histogram."
+        },
+        {
+            "argument": "--stat[=<width>[,<name-width>[,<count>]]]",
+            "arguments": "--stat[=<width>[,<name-width>[,<count>]]]",
+            "description": "Generate a diffstat. Control width, name-width, and count."
+        },
+        {
+            "argument": "--compact-summary",
+            "arguments": "--compact-summary",
+            "description": "Output a condensed summary of extended header information in diffstat. Implies --stat."
+        },
+        {
+            "argument": "--numstat",
+            "arguments": "--numstat",
+            "description": "Similar to --stat, but shows number of added and deleted lines in decimal notation and pathname without abbreviation."
+        },
+        {
+            "argument": "--shortstat",
+            "arguments": "--shortstat",
+            "description": "Output only the last line of the --stat format containing total number of modified files, as well as number of added and deleted lines."
+        },
+        {
+            "argument": "--dirstat[=<param1>,<param2>,...]",
+            "arguments": "-X [<param1>,<param2>,...], --dirstat[=<param1>,<param2>,...]",
+            "description": "Output the distribution of relative amount of changes for each sub-directory. Parameters include: changes, lines."
+        },
+        {
+            "argument": "--cumulative",
+            "arguments": "--cumulative",
+            "description": "Synonym for --dirstat=cumulative."
+        },
+        {
+            "argument": "--dirstat-by-file[=<param>,...]",
+            "arguments": "--dirstat-by-file[=<param>,...]",
+            "description": "Synonym for --dirstat=files,<param>,... ."
+        },
+        {
+            "argument": "--summary",
+            "arguments": "--summary",
+            "description": "Output a condensed summary of extended header information such as creations, renames and mode changes."
+        },
+        {
+            "argument": "--patch-with-stat",
+            "arguments": "--patch-with-stat",
+            "description": "Synonym for -p --stat."
+        },
+        {
+            "argument": "-z",
+            "arguments": "-z",
+            "description": "When --raw, --numstat, --name-only or --name-status has been given, do not munge pathnames and use NULs as output field terminators."
+        },
+        {
+            "argument": "--name-only",
+            "arguments": "--name-only",
+            "description": "Show only the name of each changed file in the post-image tree."
+        },
+        {
+            "argument": "--name-status",
+            "arguments": "--name-status",
+            "description": "Show only the name(s) and status of each changed file."
+        },
+        {
+            "argument": "--submodule[=<format>]",
+            "arguments": "--submodule[=<format>]",
+            "description": "Specify how differences in submodules are shown. When specifying --submodule=short the short format is used."
+        },
+        {
+            "argument": "--color[=<when>]",
+            "arguments": "--color[=<when>]",
+            "description": "Show colored diff. --color (i.e. without =<when>) is the same as --color=always. <when> can be one of always, never, or auto."
+        },
+        {
+            "argument": "--no-color",
+            "arguments": "--no-color",
+            "description": "Turn off colored diff."
+        },
+        {
+            "argument": "--color-moved[=<mode>]",
+            "arguments": "--color-moved[=<mode>]",
+            "description": "Moved lines of code are colored differently."
+        },
+        {
+            "argument": "--no-color-moved",
+            "arguments": "--no-color-moved",
+            "description": "Turn off move detection."
+        },
+        {
+            "argument": "--color-moved-ws=<mode>,...",
+            "arguments": "--color-moved-ws=<mode>,...",
+            "description": "This configures how whitespace is ignored when performing the move detection for --color-moved."
+        },
+        {
+            "argument": "--no-color-moved-ws",
+            "arguments": "--no-color-moved-ws",
+            "description": "Do not ignore whitespace when performing move detection."
+        },
+        {
+            "argument": "--word-diff[=<mode>]",
+            "arguments": "--word-diff[=<mode>]",
+            "description": "By default, words are delimited by whitespace; see --word-diff-regex below."
+        },
+        {
+            "argument": "--word-diff-regex=<regex>",
+            "arguments": "--word-diff-regex=<regex>",
+            "description": "Use <regex> to decide what a word is, instead of considering runs of non-whitespace to be a word. Also implies --word-diff unless it was already enabled."
+        },
+        {
+            "argument": "--color-words[=<regex>]",
+            "arguments": "--color-words[=<regex>]",
+            "description": "Equivalent to --word-diff=color plus (if a regex was specified) --word-diff-regex=<regex>."
+        },
+        {
+            "argument": "--no-renames",
+            "arguments": "--no-renames",
+            "description": "Turn off rename detection, even when the configuration file gives the default to do so."
+        },
+        {
+            "argument": "--rename-empty",
+            "arguments": "--rename-empty",
+            "description": "Whether to use empty blobs as rename source."
+        },
+        {
+            "argument": "--no-rename-empty",
+            "arguments": "--no-rename-empty",
+            "description": "Prevent use of empty blobs as rename source."
+        },
+        {
+            "argument": "--check",
+            "arguments": "--check",
+            "description": "Warn if changes introduce conflict markers or whitespace errors."
+        },
+        {
+            "argument": "--ws-error-highlight=<kind>",
+            "arguments": "--ws-error-highlight=<kind>",
+            "description": "Highlight whitespace errors in the context, old or new lines of the diff. Multiple values are separated by comma."
+        },
+        {
+            "argument": "--full-index",
+            "arguments": "--full-index",
+            "description": "Instead of the first handful of characters, show the full pre- and post-image blob object names on the \"index\" line when generating patch format output."
+        },
+        {
+            "argument": "--binary",
+            "arguments": "--binary",
+            "description": "In addition to --full-index, output a binary diff that can be applied with git-apply. Implies --patch."
+        },
+        {
+            "argument": "--abbrev[=<n>]",
+            "arguments": "--abbrev[=<n>]",
+            "description": "Instead of showing the full 40-byte hexadecimal object name in diff-raw format output and diff-tree header lines, show the shortest prefix that is at least <n> hexdigits long that uniquely refers the object."
+        },
+        {
+            "argument": "--break-rewrites[=[<n>][/<m>]]",
+            "arguments": "-B[<n>][/<m>], --break-rewrites[=[<n>][/<m>]]",
+            "description": "Break complete rewrite changes into pairs of delete and create."
+        },
+        {
+            "argument": "--find-renames[=<n>]",
+            "arguments": "-M[<n>], --find-renames[=<n>]",
+            "description": "Detect renames. If <n> is specified, it is a threshold on the similarity index (i.e. amount of addition/deletions compared to the file's size)."
+        },
+        {
+            "argument": "--find-copies[=<n>]",
+            "arguments": "-C[<n>], --find-copies[=<n>]",
+            "description": "Detect copies as well as renames."
+        },
+        {
+            "argument": "--find-copies-harder",
+            "arguments": "--find-copies-harder",
+            "description": "For performance reasons, by default, -C option finds copies only if the original file of the copy was modified in the same changeset. This flag makes the command inspect unmodified files as candidates for the source of copy."
+        },
+        {
+            "argument": "--irreversible-delete",
+            "arguments": "-D, --irreversible-delete",
+            "description": "."
+        },
+        {
+            "argument": "-l<num>",
+            "arguments": "-l<num>",
+            "description": "This option prevents the exhaustive portion of rename/copy detection from running if the number of source/destination files involved exceeds the specified number."
+        },
+        {
+            "argument": "--diff-filter=[(A|C|D|M|R|T|U|X|B)...[*]]",
+            "arguments": "--diff-filter=[(A|C|D|M|R|T|U|X|B)...[*]]",
+            "description": "Select only files that are Added (A), Copied (C), Deleted (D), Modified (M), Renamed (R), have their type (i.e. regular file, symlink, submodule, …​) changed (T), are Unmerged (U), are Unknown (X), or have had their pairing Broken (B). Any combination of the filter characters (including none) can be used."
+        },
+        {
+            "argument": "-S<string>",
+            "arguments": "-S<string>",
+            "description": "Look for differences that change the number of occurrences of the specified <string> (i.e. addition/deletion) in a file. Intended for the scripter's use."
+        },
+        {
+            "argument": "-G<regex>",
+            "arguments": "-G<regex>",
+            "description": "Look for differences whose patch text contains added/removed lines that match <regex>."
+        },
+        {
+            "argument": "--find-object=<object-id>",
+            "arguments": "--find-object=<object-id>",
+            "description": "Look for differences that change the number of occurrences of the specified object. Similar to -S, just the argument is different in that it doesn't search for a specific string but for a specific object id."
+        },
+        {
+            "argument": "--pickaxe-all",
+            "arguments": "--pickaxe-all",
+            "description": "When -S or -G finds a change, show all the changes in that changeset, not just the files that contain the change in <string>."
+        },
+        {
+            "argument": "--pickaxe-regex",
+            "arguments": "--pickaxe-regex",
+            "description": "Treat the <string> given to -S as an extended POSIX regular expression to match."
+        },
+        {
+            "argument": "-O<orderfile>",
+            "arguments": "-O<orderfile>",
+            "description": "Control the order in which files appear in the output."
+        },
+        {
+            "argument": "--skip-to=<file>",
+            "arguments": "--skip-to=<file>",
+            "description": "Discard the files before the named <file> from the output (i.e. skip to)."
+        },
+        {
+            "argument": "--rotate-to=<file>",
+            "arguments": "--rotate-to=<file>",
+            "description": "Move the files before the named <file> to the end of the output (i.e. rotate to)."
+        },
+        {
+            "argument": "-R",
+            "arguments": "-R",
+            "description": "Swap two inputs; that is, show differences from index or on-disk file to tree contents."
+        },
+        {
+            "argument": "--relative[=<path>]",
+            "arguments": "--relative[=<path>]",
+            "description": "When run from a subdirectory of the project, it can be told to exclude changes outside the directory and show pathnames relative to it with this option."
+        },
+        {
+            "argument": "--no-relative",
+            "arguments": "--no-relative",
+            "description": "Used to countermand both diff.relative config option and previous --relative."
+        },
+        {
+            "argument": "--text",
+            "arguments": "-a, --text",
+            "description": "Treat all files as text."
+        },
+        {
+            "argument": "--ignore-cr-at-eol",
+            "arguments": "--ignore-cr-at-eol",
+            "description": "Ignore carriage-return at the end of line when doing a comparison."
+        },
+        {
+            "argument": "--ignore-space-at-eol",
+            "arguments": "--ignore-space-at-eol",
+            "description": "Ignore changes in whitespace at EOL."
+        },
+        {
+            "argument": "--ignore-space-change",
+            "arguments": "-b, --ignore-space-change",
+            "description": "Ignore changes in amount of whitespace. This ignores whitespace at line end, and considers all other sequences of one or more whitespace characters to be equivalent."
+        },
+        {
+            "argument": "--ignore-all-space",
+            "arguments": "-w, --ignore-all-space",
+            "description": "Ignore whitespace when comparing lines. This ignores differences even if one line has whitespace where the other line has none."
+        },
+        {
+            "argument": "--ignore-blank-lines",
+            "arguments": "--ignore-blank-lines",
+            "description": "Ignore changes whose lines are all blank."
+        },
+        {
+            "argument": "--ignore-matching-lines=<regex>",
+            "arguments": "-I<regex>, --ignore-matching-lines=<regex>",
+            "description": "Ignore changes whose all lines match <regex>. This option may be specified more than once."
+        },
+        {
+            "argument": "--inter-hunk-context=<number>",
+            "arguments": "--inter-hunk-context=<number>",
+            "description": "Show the context between diff hunks, up to the specified <number> of lines, thereby fusing hunks that are close to each other."
+        },
+        {
+            "argument": "--function-context",
+            "arguments": "-W, --function-context",
+            "description": "Show whole function as context lines for each change."
+        },
+        {
+            "argument": "--exit-code",
+            "arguments": "--exit-code",
+            "description": "Make the program exit with codes similar to diff. That is, it exits with 1 if there were differences and 0 means no differences."
+        },
+        {
+            "argument": "--quiet",
+            "arguments": "--quiet",
+            "description": "Disable all output of the program. Implies --exit-code."
+        },
+        {
+            "argument": "--ext-diff",
+            "arguments": "--ext-diff",
+            "description": "Allow an external diff helper to be executed."
+        },
+        {
+            "argument": "--no-ext-diff",
+            "arguments": "--no-ext-diff",
+            "description": "Disallow external diff drivers."
+        },
+        {
+            "argument": "--textconv",
+            "arguments": "--textconv",
+            "description": "Allow external text conversion filters to be run when comparing binary files."
+        },
+        {
+            "argument": "--no-textconv",
+            "arguments": "--no-textconv",
+            "description": "Disallow external text conversion filters to be run when comparing binary files."
+        },
+        {
+            "argument": "--ignore-submodules[=(none|untracked|dirty|all)]",
+            "arguments": "--ignore-submodules[=(none|untracked|dirty|all)]",
+            "description": "Ignore changes to submodules in the diff generation. all is the default."
+        },
+        {
+            "argument": "--src-prefix=<prefix>",
+            "arguments": "--src-prefix=<prefix>",
+            "description": "Show the given source <prefix> instead of \"a/\"."
+        },
+        {
+            "argument": "--dst-prefix=<prefix>",
+            "arguments": "--dst-prefix=<prefix>",
+            "description": "Show the given destination <prefix> instead of \"b/\"."
+        },
+        {
+            "argument": "--no-prefix",
+            "arguments": "--no-prefix",
+            "description": "Do not show any source or destination prefix."
+        },
+        {
+            "argument": "--default-prefix",
+            "arguments": "--default-prefix",
+            "description": "Use the default source and destination prefixes (\"a/\" and \"b/\")."
+        },
+        {
+            "argument": "--line-prefix=<prefix>",
+            "arguments": "--line-prefix=<prefix>",
+            "description": "Prepend an additional <prefix> to every line of output."
+        },
+        {
+            "argument": "--ita-invisible-in-index",
+            "arguments": "--ita-invisible-in-index",
+            "description": "This option makes the entry appear as a new file in git diff and non-existent in git diff --cached."
+        },
+        {
+            "argument": "--base",
+            "arguments": "-1, --base",
+            "description": "Compare the working tree with the \"base\" version (stage #1)."
+        },
+        {
+            "argument": "--ours",
+            "arguments": "-2, --ours",
+            "description": "Compare the working tree with the \"our branch\" (stage #2)."
+        },
+        {
+            "argument": "--theirs",
+            "arguments": "-3, --theirs",
+            "description": "Compare the working tree with the \"their branch\" (stage #3)."
+        },
+        {
+            "argument": "-0",
+            "arguments": "-0",
+            "description": "Omit diff output for unmerged entries and just show \"Unmerged\". Can be used only when comparing the working tree with the index."
+        },
+        {
+            "argument": "<path>...",
+            "arguments": "<path>...",
+            "description": "The <path> parameters, when given, are used to limit the diff to the named paths (you can give directory names and get diff for all files under them)."
+        }
+    ]
+}

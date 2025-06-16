@@ -1,0 +1,66 @@
+{
+    "command_name": "ls-remote",
+    "description": "List references in a remote repository",
+    "options": [
+        {
+            "argument": "--branches",
+            "arguments": "-b, --branches",
+            "description": "Limit to only references stored in refs/heads. Note that --heads and -h are deprecated synonyms for --branches and -b."
+        },
+        {
+            "argument": "--tags",
+            "arguments": "-t, --tags",
+            "description": "Limit to only references stored in refs/tags. When both --branches and --tags are given, references from both refs/heads and refs/tags are displayed."
+        },
+        {
+            "argument": "--refs",
+            "arguments": "--refs",
+            "description": "Do not show peeled tags or pseudorefs like HEAD in the output."
+        },
+        {
+            "argument": "--quiet",
+            "arguments": "-q, --quiet",
+            "description": "Do not print remote URL to stderr."
+        },
+        {
+            "argument": "--upload-pack=<exec>",
+            "arguments": "--upload-pack=<exec>",
+            "description": "Specify the full path of git-upload-pack on the remote host. This allows listing references from repositories accessed via SSH and where the SSH daemon does not use the PATH configured by the user."
+        },
+        {
+            "argument": "--exit-code",
+            "arguments": "--exit-code",
+            "description": "Exit with status \"2\" when no matching refs are found in the remote repository. Usually the command exits with status \"0\"."
+        },
+        {
+            "argument": "--get-url",
+            "arguments": "--get-url",
+            "description": "Expand the URL of the given remote repository taking into account any \"url.<base>.insteadOf\" config setting and exit without talking to the remote."
+        },
+        {
+            "argument": "--symref",
+            "arguments": "--symref",
+            "description": "In addition to the object pointed by it, show the underlying ref pointed by it when showing a symbolic ref. Currently, upload-pack only shows the symref HEAD."
+        },
+        {
+            "argument": "--sort=<key>",
+            "arguments": "--sort=<key>",
+            "description": "Sort based on the key given. Prefix - to sort in descending order. Supports \"version:refname\" or \"v:refname\". See git-for-each-ref[1] for more sort options."
+        },
+        {
+            "argument": "--server-option=<option>",
+            "arguments": "-o <option>, --server-option=<option>",
+            "description": "Transmit the given string to the server when communicating using protocol version 2. The given string must not contain a NUL or LF character. When multiple are given, they are all sent in order."
+        },
+        {
+            "argument": "<repository>",
+            "arguments": "<repository>",
+            "description": "The \"remote\" repository to query."
+        },
+        {
+            "argument": "<patterns>...",
+            "arguments": "<patterns>...",
+            "description": "When specified, only references matching one or more of the given patterns are displayed."
+        }
+    ]
+}

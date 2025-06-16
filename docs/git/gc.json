@@ -1,0 +1,71 @@
+{
+    "command_name": "gc",
+    "description": "Cleanup unnecessary files and optimize the local repository",
+    "options": [
+        {
+            "argument": "--aggressive",
+            "arguments": "--aggressive",
+            "description": "More aggressively optimize the repository at the expense of taking much more time."
+        },
+        {
+            "argument": "--auto",
+            "arguments": "--auto",
+            "description": "Check whether any housekeeping is required; if not, exit without performing any work."
+        },
+        {
+            "argument": "--detach",
+            "arguments": "--detach",
+            "description": "Run in the background if the system supports it. This option overrides the gc.autoDetach config."
+        },
+        {
+            "argument": "--no-detach",
+            "arguments": "--no-detach",
+            "description": "Do not run in the background. This option overrides the gc.autoDetach config."
+        },
+        {
+            "argument": "--cruft",
+            "arguments": "--cruft",
+            "description": "When expiring unreachable objects, pack them separately into a cruft pack instead of storing them as loose objects."
+        },
+        {
+            "argument": "--no-cruft",
+            "arguments": "--no-cruft",
+            "description": "Do not pack unreachable objects into a cruft pack."
+        },
+        {
+            "argument": "--max-cruft-size=<n>",
+            "arguments": "--max-cruft-size=<n>",
+            "description": "When packing unreachable objects into a cruft pack, limit the size of new cruft packs to be at most <n> bytes."
+        },
+        {
+            "argument": "--expire-to=<dir>",
+            "arguments": "--expire-to=<dir>",
+            "description": "When packing unreachable objects into a cruft pack, write a cruft pack containing pruned objects to the directory <dir>."
+        },
+        {
+            "argument": "--prune=<date>",
+            "arguments": "--prune=<date>",
+            "description": "Prune loose objects older than date (default is 2 weeks ago). --prune=now prunes loose objects regardless of their age."
+        },
+        {
+            "argument": "--no-prune",
+            "arguments": "--no-prune",
+            "description": "Do not prune any loose objects."
+        },
+        {
+            "argument": "--quiet",
+            "arguments": "--quiet",
+            "description": "Suppress all progress reports."
+        },
+        {
+            "argument": "--force",
+            "arguments": "--force",
+            "description": "Force git gc to run even if there may be another git gc instance running on this repository."
+        },
+        {
+            "argument": "--keep-largest-pack",
+            "arguments": "--keep-largest-pack",
+            "description": "All packs except the largest non-cruft pack, any packs marked with a .keep file, and any cruft pack(s) are consolidated into a single pack."
+        }
+    ]
+}

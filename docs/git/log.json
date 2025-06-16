@@ -1,0 +1,481 @@
+{
+    "command_name": "log",
+    "description": "Show commit logs",
+    "options": [
+        {
+            "argument": "--follow",
+            "arguments": "--follow",
+            "description": "Continue listing the history of a file beyond renames (works only for a single file)."
+        },
+        {
+            "argument": "--no-decorate",
+            "arguments": "--no-decorate",
+            "description": "Do not print out ref names of any commits."
+        },
+        {
+            "argument": "--decorate[=short|full|auto|no]",
+            "arguments": "--decorate[=short|full|auto|no]",
+            "description": "Print out ref names of commits. Optionally specify `short`, `full`, `auto`, or `no` to adjust the decoration format (shorthand for `--decorate=short`)."
+        },
+        {
+            "argument": "--decorate-refs=<pattern>",
+            "arguments": "--decorate-refs=<pattern>",
+            "description": "Include only refs matching the given shell glob pattern in the decorations."
+        },
+        {
+            "argument": "--decorate-refs-exclude=<pattern>",
+            "arguments": "--decorate-refs-exclude=<pattern>",
+            "description": "Exclude refs matching the given shell glob pattern from the decorations."
+        },
+        {
+            "argument": "--clear-decorations",
+            "arguments": "--clear-decorations",
+            "description": "Clear all previous decoration settings and include all refs."
+        },
+        {
+            "argument": "--source",
+            "arguments": "--source",
+            "description": "Print out the ref name given on the command line by which each commit was reached."
+        },
+        {
+            "argument": "--mailmap",
+            "arguments": "--mailmap",
+            "description": "Use the mailmap file to canonicalize author and committer names and emails."
+        },
+        {
+            "argument": "--no-mailmap",
+            "arguments": "--no-mailmap",
+            "description": "Do not use the mailmap file; show author and committer names and emails as recorded."
+        },
+        {
+            "argument": "--use-mailmap",
+            "arguments": "--use-mailmap",
+            "description": "Synonym for --mailmap."
+        },
+        {
+            "argument": "--no-use-mailmap",
+            "arguments": "--no-use-mailmap",
+            "description": "Synonym for --no-mailmap."
+        },
+        {
+            "argument": "--full-diff",
+            "arguments": "--full-diff",
+            "description": "Show the full diff for commits touching specified paths, rather than limiting the diff itself."
+        },
+        {
+            "argument": "--log-size",
+            "arguments": "--log-size",
+            "description": "Include a “log size <number>” line indicating the length (in bytes) of each commit message."
+        },
+        {
+            "argument": "-L<start>,<end>:<file>",
+            "arguments": "-L<start>,<end>:<file>, -L:<funcname>:<file>",
+            "description": "Trace the evolution of a line range or function within a file. Implies --patch."
+        },
+        {
+            "argument": "<revision-range>",
+            "arguments": "<revision-range>",
+            "description": "Show only commits in the specified revision range. When no <revision-range> is specified, it defaults to HEAD (i.e. the whole history leading to the current commit)."
+        },
+        {
+            "argument": "--",
+            "arguments": "--",
+            "description": "Do not interpret any more arguments as options."
+        },
+        {
+            "argument": "<path>...",
+            "arguments": "<path>...",
+            "description": "Show only commits that are enough to explain how the files that match the specified paths came to be."
+        },
+        {
+            "argument": "--max-count=<number>",
+            "arguments": "-<number>, -n <number>, --max-count=<number>",
+            "description": "Limit the number of commits to output."
+        },
+        {
+            "argument": "--skip=<number>",
+            "arguments": "--skip=<number>",
+            "description": "Skip <number> commits before starting to show the commit output."
+        },
+        {
+            "argument": "--since=<date>",
+            "arguments": "--since=<date>, --after=<date>",
+            "description": "Show commits more recent than a specific date."
+        },
+        {
+            "argument": "--since-as-filter=<date>",
+            "arguments": "--since-as-filter=<date>",
+            "description": "Show all commits more recent than a specific date by visiting the entire commit range instead of stopping at the first older commit."
+        },
+        {
+            "argument": "--until=<date>",
+            "arguments": "--until=<date>, --before=<date>",
+            "description": "Show commits older than a specific date."
+        },
+        {
+            "argument": "--author=<pattern>",
+            "arguments": "--author=<pattern>",
+            "description": "Limit output to commits whose author header lines match the given regular expression."
+        },
+        {
+            "argument": "--committer=<pattern>",
+            "arguments": "--committer=<pattern>",
+            "description": "Limit output to commits whose committer header lines match the given regular expression."
+        },
+        {
+            "argument": "--grep-reflog=<pattern>",
+            "arguments": "--grep-reflog=<pattern>",
+            "description": "Limit output to commits whose reflog entries match the given regular expression (requires --walk-reflogs)."
+        },
+        {
+            "argument": "--grep=<pattern>",
+            "arguments": "--grep=<pattern>",
+            "description": "Limit output to commits whose log message matches the given regular expression."
+        },
+        {
+            "argument": "--all-match",
+            "arguments": "--all-match",
+            "description": "Require that commits match **all** given --grep patterns rather than any one."
+        },
+        {
+            "argument": "--invert-grep",
+            "arguments": "--invert-grep",
+            "description": "Limit output to commits whose log messages **do not** match the given --grep pattern."
+        },
+        {
+            "argument": "--regexp-ignore-case",
+            "arguments": "-i, --regexp-ignore-case",
+            "description": "Match --grep, --author, etc. patterns case-insensitively."
+        },
+        {
+            "argument": "--basic-regexp",
+            "arguments": "--basic-regexp",
+            "description": "Treat limiting patterns as basic (POSIX) regular expressions (default)."
+        },
+        {
+            "argument": "--extended-regexp",
+            "arguments": "-E, --extended-regexp",
+            "description": "Treat limiting patterns as extended regular expressions."
+        },
+        {
+            "argument": "--fixed-strings",
+            "arguments": "-F, --fixed-strings",
+            "description": "Treat limiting patterns as fixed strings (no regex interpretation)."
+        },
+        {
+            "argument": "--perl-regexp",
+            "arguments": "-P, --perl-regexp",
+            "description": "Treat limiting patterns as Perl-compatible regular expressions."
+        },
+        {
+            "argument": "--remove-empty",
+            "arguments": "--remove-empty",
+            "description": "Stop traversal when a given path disappears from the tree."
+        },
+        {
+            "argument": "--merges",
+            "arguments": "--merges",
+            "description": "Print only merge commits (equivalent to --min-parents=2)."
+        },
+        {
+            "argument": "--no-merges",
+            "arguments": "--no-merges",
+            "description": "Do not print merge commits (equivalent to --max-parents=1)."
+        },
+        {
+            "argument": "--min-parents=<number>",
+            "arguments": "--min-parents=<number>",
+            "description": "Show only commits with **at least** <number> parents."
+        },
+        {
+            "argument": "--max-parents=<number>",
+            "arguments": "--max-parents=<number>",
+            "description": "Show only commits with **at most** <number> parents."
+        },
+        {
+            "argument": "--no-min-parents",
+            "arguments": "--no-min-parents",
+            "description": "Remove any minimum-parent constraint (no lower limit)."
+        },
+        {
+            "argument": "--no-max-parents",
+            "arguments": "--no-max-parents",
+            "description": "Remove any maximum-parent constraint (no upper limit)."
+        },
+        {
+            "argument": "--first-parent",
+            "arguments": "--first-parent",
+            "description": "Follow only the first parent when traversing merge commits."
+        },
+        {
+            "argument": "--exclude-first-parent-only",
+            "arguments": "--exclude-first-parent-only",
+            "description": "When using `^` to exclude commits, follow only the first parent for that exclusion."
+        },
+        {
+            "argument": "--not",
+            "arguments": "--not",
+            "description": "Reverses the meaning of the ^ prefix for all following revision specifiers."
+        },
+        {
+            "argument": "--all",
+            "arguments": "--all",
+            "description": "Pretend as if all the refs in refs/, along with HEAD, are listed on the command line as <commit>."
+        },
+        {
+            "argument": "--branches[=<pattern>]",
+            "arguments": "--branches[=<pattern>]",
+            "description": "Pretend as if all the refs in refs/heads are listed on the command line as <commit>."
+        },
+        {
+            "argument": "--tags[=<pattern>]",
+            "arguments": "--tags[=<pattern>]",
+            "description": "Pretend as if all the refs in refs/tags are listed on the command line as <commit>. If <pattern> is given, limit tags to ones matching given shell glob."
+        },
+        {
+            "argument": "--remotes[=<pattern>]",
+            "arguments": "--remotes[=<pattern>]",
+            "description": "Pretend as if all the refs in refs/remotes are listed on the command line as <commit>. If <pattern> is given, limit remote-tracking branches to ones matching given shell glob."
+        },
+        {
+            "argument": "--glob=<glob-pattern>",
+            "arguments": "--glob=<glob-pattern>",
+            "description": "Pretend as if all the refs matching shell glob <glob-pattern> are listed on the command line as <commit>."
+        },
+        {
+            "argument": "--exclude=<glob-pattern>",
+            "arguments": "--exclude=<glob-pattern>",
+            "description": "Do not include refs matching <glob-pattern> that would otherwise be considered."
+        },
+        {
+            "argument": "--exclude-hidden=[fetch|receive|uploadpack]",
+            "arguments": "--exclude-hidden=[fetch|receive|uploadpack]",
+            "description": "Do not include refs that would be hidden by git-fetch, git-receive-pack or git-upload-pack by consulting the appropriate fetch.hideRefs, receive.hideRefs or uploadpack.hideRefs configuration along with transfer.hideRefs."
+        },
+        {
+            "argument": "--reflog",
+            "arguments": "--reflog",
+            "description": "Pretend as if all objects mentioned by reflogs are listed on the command line."
+        },
+        {
+            "argument": "--alternate-refs",
+            "arguments": "--alternate-refs",
+            "description": "Pretend as if all objects mentioned as ref tips of alternate repositories were listed on the command line."
+        },
+        {
+            "argument": "--single-worktree",
+            "arguments": "--single-worktree",
+            "description": "Examine only the current working tree when there are multiple."
+        },
+        {
+            "argument": "--ignore-missing",
+            "arguments": "--ignore-missing",
+            "description": "Upon seeing an invalid object name in the input, pretend as if the bad input was not given."
+        },
+        {
+            "argument": "--stdin",
+            "arguments": "--stdin",
+            "description": "In addition to getting arguments from the command line, read them from standard input as well."
+        },
+        {
+            "argument": "--cherry-mark",
+            "arguments": "--cherry-mark",
+            "description": "Like --cherry-pick (see below) but mark equivalent commits with = rather than omitting them, and inequivalent ones with +."
+        },
+        {
+            "argument": "--cherry-pick",
+            "arguments": "--cherry-pick",
+            "description": "Omit any commit that introduces the same change as another commit on the “other side” when the set of commits are limited with symmetric difference."
+        },
+        {
+            "argument": "--left-only",
+            "arguments": "--left-only",
+            "description": "List only commits on the respective side of a symmetric difference, i.e. only those which would be marked < resp. > by --left-right."
+        },
+        {
+            "argument": "--right-only",
+            "arguments": "--right-only",
+            "description": "List only commits on the respective side of a symmetric difference, i.e. only those which would be marked < resp. > by --left-right."
+        },
+        {
+            "argument": "--cherry",
+            "arguments": "--cherry",
+            "description": "A synonym for --right-only --cherry-mark --no-merges; useful to limit the output to the commits on our side and mark those that have been applied to the other side of a forked history with git log --cherry upstream...mybranch, similar to git cherry upstream mybranch."
+        },
+        {
+            "argument": "--walk-reflogs",
+            "arguments": "-g, --walk-reflogs",
+            "description": "Instead of walking the commit ancestry chain, walk reflog entries from the most recent one to older ones."
+        },
+        {
+            "argument": "--merge",
+            "arguments": "--merge",
+            "description": "Show commits touching conflicted paths in the range HEAD...<other>, where <other> is the first existing pseudoref in MERGE_HEAD, CHERRY_PICK_HEAD, REVERT_HEAD or REBASE_HEAD."
+        },
+        {
+            "argument": "--boundary",
+            "arguments": "--boundary",
+            "description": "Output excluded boundary commits. Boundary commits are prefixed with -."
+        },
+        {
+            "argument": "<paths>",
+            "arguments": "<paths>",
+            "description": "Commits modifying the given <paths> are selected."
+        },
+        {
+            "argument": "--simplify-by-decoration",
+            "arguments": "--simplify-by-decoration",
+            "description": "Simplify history by decoration, keeping only commits referenced by tags or affecting the given paths."
+        },
+        {
+            "argument": "--show-pulls",
+            "arguments": "--show-pulls",
+            "description": "Show pull merges that bring in topic branches (even if simplified away)."
+        },
+        {
+            "argument": "--full-history",
+            "arguments": "--full-history",
+            "description": "Do not simplify history—show every commit (with parent rewriting)."
+        },
+        {
+            "argument": "--dense",
+            "arguments": "--dense",
+            "description": "Only the selected commits are shown, plus some to have a meaningful history."
+        },
+        {
+            "argument": "--sparse",
+            "arguments": "--sparse",
+            "description": "All commits in the simplified history are shown."
+        },
+        {
+            "argument": "--simplify-merges",
+            "arguments": "--simplify-merges",
+            "description": "Additional option to --full-history to remove some needless merges from the resulting history, as there are no selected commits contributing to this merge."
+        },
+        {
+            "argument": "--ancestry-path[=<commit>]",
+            "arguments": "--ancestry-path[=<commit>]",
+            "description": "Show only commits on the ancestry chain to or from the given <commit>."
+        },
+        {
+            "argument": "--date-order",
+            "arguments": "--date-order",
+            "description": "Show no parents before all of its children are shown, but otherwise show commits in the commit timestamp order."
+        },
+        {
+            "argument": "--author-date-order",
+            "arguments": "--author-date-order",
+            "description": "Show no parents before all of its children are shown, but otherwise show commits in the author timestamp order."
+        },
+        {
+            "argument": "--topo-order",
+            "arguments": "--topo-order",
+            "description": "Show no parents before all of its children are shown, and avoid showing commits on multiple lines of history intermixed."
+        },
+        {
+            "argument": "--reverse",
+            "arguments": "--reverse",
+            "description": "Output the commits chosen to be shown (see Commit Limiting section above) in reverse order."
+        },
+        {
+            "argument": "--no-walk[=(sorted|unsorted)]",
+            "arguments": "--no-walk[=(sorted|unsorted)]",
+            "description": "Show only the commits given on the command line, without traversing ancestors; unsorted shows in input order, sorted (or no arg) shows in reverse chronological order."
+        },
+        {
+            "argument": "--do-walk",
+            "arguments": "--do-walk",
+            "description": "Override a previous --no-walk and resume normal ancestry traversal."
+        },
+        {
+            "argument": "--pretty[=<format>]",
+            "arguments": "--pretty[=<format>], --format=<format>",
+            "description": "Pretty-print commits using formats such as oneline, short, medium, full, fuller, reference, email, raw, format:<string> or tformat:<string>."
+        },
+        {
+            "argument": "--abbrev-commit",
+            "arguments": "--abbrev-commit",
+            "description": "Show abbreviated commit object names instead of full 40-byte hashes."
+        },
+        {
+            "argument": "--no-abbrev-commit",
+            "arguments": "--no-abbrev-commit",
+            "description": "Show the full 40-byte hexadecimal commit object name."
+        },
+        {
+            "argument": "--oneline",
+            "arguments": "--oneline",
+            "description": "This is a shorthand for \"--pretty=oneline --abbrev-commit\" used together."
+        },
+        {
+            "argument": "--encoding=<encoding>",
+            "arguments": "--encoding=<encoding>",
+            "description": "This is a shorthand for \"--pretty=oneline --abbrev-commit\" used together."
+        },
+        {
+            "argument": "--expand-tabs=<n>",
+            "arguments": "--expand-tabs=<n>",
+            "description": "Perform a tab expansion (replace each tab with enough spaces to fill to the next display column that is a multiple of <n>) in the log message before showing it in the output."
+        },
+        {
+            "argument": "--no-expand-tabs",
+            "arguments": "--no-expand-tabs",
+            "description": "Short-hand for --expand-tabs=0, which disables tab expansion."
+        },
+        {
+            "argument": "--notes[=<ref>]",
+            "arguments": "--notes[=<ref>]",
+            "description": "Show notes from the specified notes ref, or from the default if none is given."
+        },
+        {
+            "argument": "--no-notes",
+            "arguments": "--no-notes",
+            "description": "Do not show any notes, resetting the list of visible notes refs."
+        },
+        {
+            "argument": "--show-notes-by-default",
+            "arguments": "--show-notes-by-default",
+            "description": "Show default notes unless specific --notes options are given."
+        },
+        {
+            "argument": "--show-signature",
+            "arguments": "--show-signature",
+            "description": "Verify a signed commit object by passing its signature to gpg --verify and show the result."
+        },
+        {
+            "argument": "--relative-date",
+            "arguments": "--relative-date",
+            "description": "Synonym for --date=relative."
+        },
+        {
+            "argument": "--date=<format>",
+            "arguments": "--date=<format>",
+            "description": "Control date output format (relative, iso, iso-strict, rfc, short, raw, human, unix, format:<string>, format-local:<string>, default)."
+        },
+        {
+            "argument": "--parents",
+            "arguments": "--parents",
+            "description": "Also show parent hashes of each commit (enables parent rewriting)."
+        },
+        {
+            "argument": "--children",
+            "arguments": "--children",
+            "description": "Also show child hashes of each commit (enables parent rewriting)."
+        },
+        {
+            "argument": "--left-right",
+            "arguments": "--left-right",
+            "description": "Prefix commits with `<` or `>` to show which side of a symmetric difference they come from."
+        },
+        {
+            "argument": "--graph",
+            "arguments": "--graph",
+            "description": "Draw an ASCII graph of the commit history on the left side of the output."
+        },
+        {
+            "argument": "--show-linear-break[=<barrier>]",
+            "arguments": "--show-linear-break[=<barrier>]",
+            "description": "When --graph is not used, all history branches are flattened which can make it hard to see that the two consecutive commits do not belong to a linear branch."
+        }
+    ]
+}

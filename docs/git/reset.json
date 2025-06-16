@@ -1,0 +1,91 @@
+{
+    "command_name": "reset",
+    "description": "Reset current HEAD to the specified state",
+    "options": [
+        {
+            "argument": "--quiet",
+            "arguments": "-q, --quiet",
+            "description": "Be quiet, only report errors."
+        },
+        {
+            "argument": "--patch",
+            "arguments": "-p, --patch",
+            "description": "Interactively select hunks in the difference between the index and <tree-ish> to be applied in reverse to the index."
+        },
+        {
+            "argument": "--soft",
+            "arguments": "--soft",
+            "description": "Does not touch the index file or the working tree at all, but resets the head to <commit>. This leaves all your changed files as 'Changes to be committed'."
+        },
+        {
+            "argument": "--mixed",
+            "arguments": "--mixed",
+            "description": "Resets the index but not the working tree (i.e., the changed files are preserved but not marked for commit) and reports what has not been updated. This is the default action."
+        },
+        {
+            "argument": "--hard",
+            "arguments": "--hard",
+            "description": "Resets the index and working tree. Any changes to tracked files in the working tree since <commit> are discarded."
+        },
+        {
+            "argument": "--merge",
+            "arguments": "--merge",
+            "description": "Resets the index and updates the files in the working tree that are different between <commit> and HEAD, but keeps those which are different between the index and working tree."
+        },
+        {
+            "argument": "--keep",
+            "arguments": "--keep",
+            "description": "Resets index entries and updates files in the working tree that are different between <commit> and HEAD. If a file is different between <commit> and HEAD has local changes, reset is aborted."
+        },
+        {
+            "argument": "--no-recurse-submodules",
+            "arguments": "--no-recurse-submodules",
+            "description": "Do not recursively reset the working tree of any active submodule according to the commit recorded in the superproject."
+        },
+        {
+            "argument": "--recurse-submodules",
+            "arguments": "--recurse-submodules",
+            "description": "Recursively reset the working tree of all active submodules according to the commit recorded in the superproject."
+        },
+        {
+            "argument": "--refresh",
+            "arguments": "--refresh",
+            "description": "Refresh the index after a mixed reset. Enabled by default."
+        },
+        {
+            "argument": "--no-refresh",
+            "arguments": "--no-refresh",
+            "description": "Do not refresh the index after a mixed reset."
+        },
+        {
+            "argument": "--pathspec-from-file=<file>",
+            "arguments": "--pathspec-from-file=<file>",
+            "description": "Pathspec is passed in <file> instead of commandline args. If <file> is exactly - then standard input is used."
+        },
+        {
+            "argument": "--pathspec-file-nul",
+            "arguments": "--pathspec-file-nul",
+            "description": "Only meaningful with --pathspec-from-file. Pathspec elements are separated with NUL character."
+        },
+        {
+            "argument": "[<tree-ish>]",
+            "arguments": "[<tree-ish>]",
+            "description": "Resets the index entries for all <paths> to their state at <tree-ish>"
+        },
+        {
+            "argument": "--",
+            "arguments": "--",
+            "description": "Do not interpret any more arguments as options."
+        },
+        {
+            "argument": "<pathspec>...",
+            "arguments": "<pathspec>...",
+            "description": "Limits the paths affected by the operation."
+        },
+        {
+            "argument": "[<commit>]",
+            "arguments": "[<commit>]",
+            "description": "Resetting it to the tree of <commit>."
+        }
+    ]
+}

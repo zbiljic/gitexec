@@ -1,0 +1,251 @@
+{
+    "command_name": "rev-parse",
+    "description": "Pick out and massage parameters",
+    "options": [
+        {
+            "argument": "--parseopt",
+            "arguments": "--parseopt",
+            "description": "Use git rev-parse in option parsing mode (see PARSEOPT section below)."
+        },
+        {
+            "argument": "--sq-quote",
+            "arguments": "--sq-quote",
+            "description": "Use git rev-parse in shell quoting mode (see SQ-QUOTE section below). In contrast to the --sq option below, this mode only does quoting. Nothing else is done to command input."
+        },
+        {
+            "argument": "--keep-dashdash",
+            "arguments": "--keep-dashdash",
+            "description": "Only meaningful in --parseopt mode. Tells the option parser to echo out the first -- met instead of skipping it."
+        },
+        {
+            "argument": "--stop-at-non-option",
+            "arguments": "--stop-at-non-option",
+            "description": "Only meaningful in --parseopt mode. Lets the option parser stop at the first non-option argument. This can be used to parse sub-commands that take options themselves."
+        },
+        {
+            "argument": "--stuck-long",
+            "arguments": "--stuck-long",
+            "description": "Only meaningful in --parseopt mode. Output the options in their long form if available, and with their arguments stuck."
+        },
+        {
+            "argument": "--revs-only",
+            "arguments": "--revs-only",
+            "description": "Do not output flags and parameters not meant for git rev-list command."
+        },
+        {
+            "argument": "--no-revs",
+            "arguments": "--no-revs",
+            "description": "Do not output flags and parameters meant for git rev-list command."
+        },
+        {
+            "argument": "--flags",
+            "arguments": "--flags",
+            "description": "Do not output non-flag parameters."
+        },
+        {
+            "argument": "--no-flags",
+            "arguments": "--no-flags",
+            "description": "Do not output flag parameters."
+        },
+        {
+            "argument": "--default <arg>",
+            "arguments": "--default <arg>",
+            "description": "If there is no parameter given by the user, use <arg> instead."
+        },
+        {
+            "argument": "--prefix <arg>",
+            "arguments": "--prefix <arg>",
+            "description": "Behave as if git rev-parse was invoked from the <arg> subdirectory of the working tree. Any relative filenames are resolved as if they are prefixed by <arg> and will be printed in that form."
+        },
+        {
+            "argument": "--verify",
+            "arguments": "--verify",
+            "description": "Verify that exactly one parameter is provided, and that it can be turned into a raw 20-byte SHA-1 that can be used to access the object database. If so, emit it to the standard output; otherwise, error out."
+        },
+        {
+            "argument": "--quiet",
+            "arguments": "-q, --quiet",
+            "description": "Only meaningful in --verify mode. Do not output an error message if the first argument is not a valid object name; instead exit with non-zero status silently. SHA-1s for valid object names are printed to stdout on success."
+        },
+        {
+            "argument": "--sq",
+            "arguments": "--sq",
+            "description": "Usually the output is made one line per flag and parameter. This option makes output a single line, properly quoted for consumption by shell. Useful when you expect your parameter to contain whitespaces and newlines (e.g. when using pickaxe -S with git diff-*). In contrast to the --sq-quote option, the command input is still interpreted as usual."
+        },
+        {
+            "argument": "--short[=<length>]",
+            "arguments": "--short[=<length>]",
+            "description": "Same as --verify but shortens the object name to a unique prefix with at least length characters. The minimum length is 4, the default is the effective value of the core.abbrev configuration variable (see git-config[1])."
+        },
+        {
+            "argument": "--not",
+            "arguments": "--not",
+            "description": "When showing object names, prefix them with ^ and strip ^ prefix from the object names that already have one."
+        },
+        {
+            "argument": "--abbrev-ref[=(strict|loose)]",
+            "arguments": "--abbrev-ref[=(strict|loose)]",
+            "description": "A non-ambiguous short name of the objects name. The option core.warnAmbiguousRefs is used to select the strict abbreviation mode."
+        },
+        {
+            "argument": "--symbolic",
+            "arguments": "--symbolic",
+            "description": "Usually the object names are output in SHA-1 form (with possible ^ prefix); this option makes them output in a form as close to the original input as possible."
+        },
+        {
+            "argument": "--symbolic-full-name",
+            "arguments": "--symbolic-full-name",
+            "description": "This is similar to --symbolic, but it omits input that is not a ref name (i.e. branch or tag name)."
+        },
+        {
+            "argument": "--output-object-format=(sha1|sha256|storage)",
+            "arguments": "--output-object-format=(sha1|sha256|storage)",
+            "description": "Allow oids to be input from any object format that the current repository supports."
+        },
+        {
+            "argument": "--all",
+            "arguments": "--all",
+            "description": "Show all refs found in refs/."
+        },
+        {
+            "argument": "--branches[=<pattern>]",
+            "arguments": "--branches[=<pattern>]",
+            "description": "Show all branches (i.e., refs found in refs/heads). If a pattern is given, only refs matching the given shell glob are shown. If the pattern does not contain a globbing character ( ?, *, or [), it is turned into a prefix match by appending /*."
+        },
+        {
+            "argument": "--tags[=<pattern>]",
+            "arguments": "--tags[=<pattern>]",
+            "description": "Show all tags (i.e., refs found in refs/tags). If a pattern is given, only refs matching the given shell glob are shown. If the pattern does not contain a globbing character ( ?, *, or [), it is turned into a prefix match by appending /*."
+        },
+        {
+            "argument": "--remotes[=<pattern>]",
+            "arguments": "--remotes[=<pattern>]",
+            "description": "Show all remote-tracking branches (i.e., refs found in refs/remotes). If a pattern is given, only refs matching the given shell glob are shown. If the pattern does not contain a globbing character ( ?, *, or [), it is turned into a prefix match by appending /*."
+        },
+        {
+            "argument": "--glob=<pattern>",
+            "arguments": "--glob=<pattern>",
+            "description": "Show all refs matching the shell glob pattern pattern. If the pattern does not start with refs/, this is automatically prepended. If the pattern does not contain a globbing character ( ?, *, or [), it is turned into a prefix match by appending /*."
+        },
+        {
+            "argument": "--exclude=<glob-pattern>",
+            "arguments": "--exclude=<glob-pattern>",
+            "description": "Do not include refs matching <glob-pattern> that the next --all, --branches, --tags, --remotes, or --glob would otherwise consider. Repetitions of this option accumulate exclusion patterns up to the next --all, --branches, --tags, --remotes, or --glob option (other options or arguments do not clear accumulated patterns). The patterns given should not begin with refs/heads, refs/tags, or refs/remotes when applied to --branches, --tags, or --remotes, respectively, and they must begin with refs/ when applied to --glob or --all. If a trailing /* is intended, it must be given explicitly."
+        },
+        {
+            "argument": "--exclude-hidden=(fetch|receive|uploadpack)",
+            "arguments": "--exclude-hidden=(fetch|receive|uploadpack)",
+            "description": "Do not include refs that would be hidden by git-fetch, git-receive-pack or git-upload-pack by consulting the appropriate fetch.hideRefs, receive.hideRefs or uploadpack.hideRefs configuration along with transfer.hideRefs (see git-config[1]). This option affects the next pseudo-ref option --all or --glob and is cleared after processing them."
+        },
+        {
+            "argument": "--disambiguate=<prefix>",
+            "arguments": "--disambiguate=<prefix>",
+            "description": "Show every object whose name begins with the given prefix. The <prefix> must be at least 4 hexadecimal digits long to avoid listing each and every object in the repository by mistake."
+        },
+        {
+            "argument": "--local-env-vars",
+            "arguments": "--local-env-vars",
+            "description": "List the GIT_* environment variables that are local to the repository (e.g. GIT_DIR or GIT_WORK_TREE, but not GIT_EDITOR). Only the names of the variables are listed, not their value, even if they are set."
+        },
+        {
+            "argument": "--path-format=(absolute|relative)",
+            "arguments": "--path-format=(absolute|relative)",
+            "description": "Controls the behavior of certain other options. If specified as absolute, the paths printed by those options will be absolute and canonical. If specified as relative, the paths will be relative to the current working directory if that is possible. The default is option specific. This option may be specified multiple times and affects only the arguments that follow it on the command line, either to the end of the command line or the next instance of this option."
+        },
+        {
+            "argument": "--git-dir",
+            "arguments": "--git-dir",
+            "description": "Show $GIT_DIR if defined. Otherwise show the path to the .git directory. The path shown, when relative, is relative to the current working directory. If $GIT_DIR is not defined and the current directory is not detected to lie in a Git repository or work tree print a message to stderr and exit with nonzero status."
+        },
+        {
+            "argument": "--git-common-dir",
+            "arguments": "--git-common-dir",
+            "description": "Show $GIT_COMMON_DIR if defined, else $GIT_DIR."
+        },
+        {
+            "argument": "--resolve-git-dir <path>",
+            "arguments": "--resolve-git-dir <path>",
+            "description": "Check if <path> is a valid repository or a gitfile that points at a valid repository, and print the location of the repository. If <path> is a gitfile then the resolved path to the real repository is printed."
+        },
+        {
+            "argument": "--git-path <path>",
+            "arguments": "--git-path <path>",
+            "description": "Resolve \"$GIT_DIR/<path>\" and takes other path relocation variables such as $GIT_OBJECT_DIRECTORY, $GIT_INDEX_FILE... into account. For example, if $GIT_OBJECT_DIRECTORY is set to /foo/bar then \"git rev-parse --git-path objects/abc\" returns /foo/bar/abc."
+        },
+        {
+            "argument": "--show-toplevel",
+            "arguments": "--show-toplevel",
+            "description": "Show the (by default, absolute) path of the top-level directory of the working tree. If there is no working tree, report an error."
+        },
+        {
+            "argument": "--show-superproject-working-tree",
+            "arguments": "--show-superproject-working-tree",
+            "description": "Show the absolute path of the root of the superproject’s working tree (if exists) that uses the current repository as its submodule. Outputs nothing if the current repository is not used as a submodule by any project."
+        },
+        {
+            "argument": "--shared-index-path",
+            "arguments": "--shared-index-path",
+            "description": "Show the path to the shared index file in split index mode, or empty if not in split-index mode."
+        },
+        {
+            "argument": "--absolute-git-dir",
+            "arguments": "--absolute-git-dir",
+            "description": "Like --git-dir, but its output is always the canonicalized absolute path."
+        },
+        {
+            "argument": "--is-inside-git-dir",
+            "arguments": "--is-inside-git-dir",
+            "description": "When the current working directory is below the repository directory print \"true\", otherwise \"false\"."
+        },
+        {
+            "argument": "--is-inside-work-tree",
+            "arguments": "--is-inside-work-tree",
+            "description": "When the current working directory is inside the work tree of the repository print \"true\", otherwise \"false\"."
+        },
+        {
+            "argument": "--is-bare-repository",
+            "arguments": "--is-bare-repository",
+            "description": "When the repository is bare print \"true\", otherwise \"false\"."
+        },
+        {
+            "argument": "--is-shallow-repository",
+            "arguments": "--is-shallow-repository",
+            "description": "When the repository is shallow print \"true\", otherwise \"false\"."
+        },
+        {
+            "argument": "--show-cdup",
+            "arguments": "--show-cdup",
+            "description": "When the command is invoked from a subdirectory, show the path of the top-level directory relative to the current directory (typically a sequence of \"../\", or an empty string)."
+        },
+        {
+            "argument": "--show-prefix",
+            "arguments": "--show-prefix",
+            "description": "When the command is invoked from a subdirectory, show the path of the current directory relative to the top-level directory."
+        },
+        {
+            "argument": "--show-object-format[=(storage|input|output)]",
+            "arguments": "--show-object-format[=(storage|input|output)]",
+            "description": "Show the object format (hash algorithm) used for the repository for storage inside the .git directory, input, or output. For input, multiple algorithms may be printed, space-separated. If not specified, the default is \"storage\"."
+        },
+        {
+            "argument": "--show-ref-format",
+            "arguments": "--show-ref-format",
+            "description": "Show the reference storage format used for the repository."
+        },
+        {
+            "argument": "--since=<datestring>",
+            "arguments": "--since=<datestring>, --after=<datestring>",
+            "description": "Parse the date string, and output the corresponding --max-age= parameter for git rev-list."
+        },
+        {
+            "argument": "--until=<datestring>",
+            "arguments": "--until=<datestring>, --before=<datestring>",
+            "description": "Parse the date string, and output the corresponding --min-age= parameter for git rev-list."
+        },
+        {
+            "argument": "<arg>...",
+            "arguments": "<arg>...",
+            "description": "Parameters to be picked out and massaged. These are typically a mixture of flags and parameters for underlying git commands."
+        }
+    ]
+}

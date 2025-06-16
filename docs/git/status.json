@@ -1,0 +1,91 @@
+{
+    "command_name": "status",
+    "description": "Show the working tree status",
+    "options": [
+        {
+            "argument": "--short",
+            "arguments": "-s, --short",
+            "description": "Give the output in the short-format."
+        },
+        {
+            "argument": "--branch",
+            "arguments": "-b, --branch",
+            "description": "Show the branch and tracking info even in short-format."
+        },
+        {
+            "argument": "--show-stash",
+            "arguments": "--show-stash",
+            "description": "Show the number of entries currently stashed away."
+        },
+        {
+            "argument": "--porcelain",
+            "arguments": "--porcelain[=<version>]",
+            "description": "Give the output in an easy-to-parse format for scripts. This is similar to the short output, but will remain stable across Git versions and regardless of user configuration."
+        },
+        {
+            "argument": "--long",
+            "arguments": "--long",
+            "description": "Give the output in the long-format. This is the default."
+        },
+        {
+            "argument": "--verbose",
+            "arguments": "-v, --verbose",
+            "description": "In addition to the names of files that have been changed, also show the textual changes that are staged to be committed."
+        },
+        {
+            "argument": "--untracked-files",
+            "arguments": "-u[<mode>], --untracked-files[=<mode>]",
+            "description": "Show untracked files. The mode parameter is used to specify the handling of untracked files."
+        },
+        {
+            "argument": "--ignore-submodules",
+            "arguments": "--ignore-submodules[=<when>]",
+            "description": "Ignore changes to submodules when looking for changes."
+        },
+        {
+            "argument": "--ignored",
+            "arguments": "--ignored[=<mode>]",
+            "description": "Show ignored files as well. The mode parameter is used to specify the handling of ignored files."
+        },
+        {
+            "argument": "-z",
+            "arguments": "-z",
+            "description": "Terminate entries with NUL character instead of LF."
+        },
+        {
+            "argument": "--column",
+            "arguments": "--column[=<options>]",
+            "description": "Display untracked files in columns."
+        },
+        {
+            "argument": "--no-column",
+            "arguments": "--no-column",
+            "description": "Do not display untracked files in columns."
+        },
+        {
+            "argument": "--ahead-behind",
+            "arguments": "--ahead-behind",
+            "description": "Display or do not display detailed ahead/behind counts for the branch relative to its upstream branch."
+        },
+        {
+            "argument": "--no-ahead-behind",
+            "arguments": "--no-ahead-behind",
+            "description": "Do not display detailed ahead/behind counts for the branch relative to its upstream branch."
+        },
+        {
+            "argument": "--renames",
+            "arguments": "--renames",
+            "description": "Turn on rename detection regardless of user configuration."
+        },
+        {
+            "argument": "--no-renames",
+            "arguments": "--no-renames",
+            "description": "Turn off rename detection regardless of user configuration."
+        },
+        {
+            "argument": "--find-renames[=<n>]",
+            "arguments": "--find-renames[=<n>]",
+            "description": "Turn on rename detection, optionally setting the similarity threshold."
+        }
+    ]
+}
