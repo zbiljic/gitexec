@@ -1,0 +1,106 @@
+{
+    "command_name": "add",
+    "description": "Add file contents to the index",
+    "options": [
+        {
+            "argument": "--dry-run",
+            "arguments": "-n, --dry-run",
+            "description": "Don't actually add the file(s), just show if they exist and/or will be ignored."
+        },
+        {
+            "argument": "--verbose",
+            "arguments": "-v, --verbose",
+            "description": "Be verbose."
+        },
+        {
+            "argument": "--force",
+            "arguments": "-f, --force",
+            "description": "Allow adding otherwise ignored files."
+        },
+        {
+            "argument": "--sparse",
+            "arguments": "--sparse",
+            "description": "Allow updating index entries outside of the sparse-checkout cone."
+        },
+        {
+            "argument": "--interactive",
+            "arguments": "-i, --interactive",
+            "description": "Add modified contents in the working tree interactively to the index. Optional path arguments may be supplied to limit operation to a subset of the working tree."
+        },
+        {
+            "argument": "--patch",
+            "arguments": "-p, --patch",
+            "description": "Interactively choose hunks of patch between the index and the work tree and add them to the index."
+        },
+        {
+            "argument": "--edit",
+            "arguments": "-e, --edit",
+            "description": "Open the diff vs. the index in an editor and let the user edit it. After the editor was closed, adjust the hunk headers and apply the patch to the index."
+        },
+        {
+            "argument": "--update",
+            "arguments": "-u, --update",
+            "description": "Update the index just where it already has an entry matching <pathspec>. This removes as well as modifies index entries to match the working tree, but adds no new files."
+        },
+        {
+            "argument": "--all",
+            "arguments": "-A, --all, --no-ignore-removal",
+            "description": "Update the index not only where the working tree has a file matching <pathspec> but also where the index already has an entry. This adds, modifies, and removes index entries to match the working tree."
+        },
+        {
+            "argument": "--no-all",
+            "arguments": "--no-all, --ignore-removal",
+            "description": "Update the index by adding new files that are unknown to the index and files modified in the working tree, but ignore files that have been removed from the working tree."
+        },
+        {
+            "argument": "--intent-to-add",
+            "arguments": "-N, --intent-to-add",
+            "description": "Record only the fact that the path will be added later. An entry for the path is placed in the index with no content."
+        },
+        {
+            "argument": "--refresh",
+            "arguments": "--refresh",
+            "description": "Don't add the file(s), but only refresh their stat() information in the index."
+        },
+        {
+            "argument": "--ignore-errors",
+            "arguments": "--ignore-errors",
+            "description": "If some files could not be added because of errors indexing them, do not abort the operation, but continue adding the others."
+        },
+        {
+            "argument": "--ignore-missing",
+            "arguments": "--ignore-missing",
+            "description": "This option can only be used together with --dry-run. By using this option the user can check if any of the given files would be ignored, no matter if they are already present in the work tree or not."
+        },
+        {
+            "argument": "--no-warn-embedded-repo",
+            "arguments": "--no-warn-embedded-repo",
+            "description": "Suppress the warning when adding an embedded repository to the index without using git submodule add."
+        },
+        {
+            "argument": "--renormalize",
+            "arguments": "--renormalize",
+            "description": "Apply the \"clean\" process freshly to all tracked files to forcibly add them again to the index. This option implies -u."
+        },
+        {
+            "argument": "--chmod=(+|-)x",
+            "arguments": "--chmod=(+|-)x",
+            "description": "Override the executable bit of the added files. The executable bit is only changed in the index, the files on disk are left unchanged."
+        },
+        {
+            "argument": "--pathspec-from-file=<file>",
+            "arguments": "--pathspec-from-file=<file>",
+            "description": "Pathspec is passed in <file> instead of commandline args. If <file> is exactly - then standard input is used."
+        },
+        {
+            "argument": "--pathspec-file-nul",
+            "arguments": "--pathspec-file-nul",
+            "description": "Only meaningful with --pathspec-from-file. Pathspec elements are separated with NUL character."
+        },
+        {
+            "argument": "--",
+            "arguments": "--",
+            "description": "Separate command-line options from the list of files."
+        }
+    ]
+}
