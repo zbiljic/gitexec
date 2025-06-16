@@ -139,6 +139,9 @@ func (g *Generator) generateCode(cmd CommandDoc, tags []string) {
 		f.Line()
 	}
 
+	f.PackageComment(fmt.Sprintf("// Code generated for %s. DO NOT EDIT.", g.packageName))
+	f.PackageComment("")
+
 	// Add description
 	f.PackageComment(fmt.Sprintf("git-%s - %s", cmd.CommandName, cmd.Description))
 	f.PackageComment("")
