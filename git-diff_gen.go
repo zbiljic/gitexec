@@ -13,6 +13,16 @@ import (
 type DiffOptions struct {
 	CmdDir string
 
+	// --no-index
+	// Compare two given paths on the filesystem. This form implies --exit-code.
+	NoIndex bool
+	// --cached
+	// --staged
+	// View the changes you staged for the next commit relative to the named <commit>. --staged is a synonym of --cached.
+	Cached bool
+	// --merge-base
+	// When comparing commits, use the merge base of the commit(s) and HEAD, or the merge base of two commits for the 'before' side, instead of the commit(s) directly.
+	MergeBase bool
 	// -p
 	// -u
 	// --patch
@@ -308,6 +318,9 @@ type DiffOptions struct {
 	// -0
 	// Omit diff output for unmerged entries and just show "Unmerged". Can be used only when comparing the working tree with the index.
 	Zero bool
+	// <commit>
+	// The commit to compare against. If not specified, the working tree is compared against HEAD.
+	Commit string
 	// <path>...
 	// The <path> parameters, when given, are used to limit the diff to the named paths (you can give directory names and get diff for all files under them).
 	Path []string
@@ -316,6 +329,15 @@ type DiffOptions struct {
 func DiffCmd(opts *DiffOptions) *exec.Cmd {
 	args := []string{"diff"}
 
+	if opts.NoIndex {
+		args = append(args, "--no-index")
+	}
+	if opts.Cached {
+		args = append(args, "--cached")
+	}
+	if opts.MergeBase {
+		args = append(args, "--merge-base")
+	}
 	if opts.Patch {
 		args = append(args, "--patch")
 	}
@@ -585,6 +607,9 @@ func DiffCmd(opts *DiffOptions) *exec.Cmd {
 	}
 	if opts.Zero {
 		args = append(args, "-0")
+	}
+	if opts.Commit != "" {
+		args = append(args, opts.Commit)
 	}
 	if opts.Path != nil {
 		args = append(args, opts.Path...)
