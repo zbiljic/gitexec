@@ -3,6 +3,21 @@
     "description": "Show changes between commits, commit and working tree, etc",
     "options": [
         {
+            "argument": "--no-index",
+            "arguments": "--no-index",
+            "description": "Compare two given paths on the filesystem. This form implies --exit-code."
+        },
+        {
+            "argument": "--cached",
+            "arguments": "--cached, --staged",
+            "description": "View the changes you staged for the next commit relative to the named <commit>. --staged is a synonym of --cached."
+        },
+        {
+            "argument": "--merge-base",
+            "arguments": "--merge-base",
+            "description": "When comparing commits, use the merge base of the commit(s) and HEAD, or the merge base of two commits for the 'before' side, instead of the commit(s) directly."
+        },
+        {
             "argument": "--patch",
             "arguments": "-p, -u, --patch",
             "description": "Generate patch (see Generating patch text with -p). This is the default."
@@ -451,6 +466,11 @@
             "argument": "-0",
             "arguments": "-0",
             "description": "Omit diff output for unmerged entries and just show \"Unmerged\". Can be used only when comparing the working tree with the index."
+        },
+        {
+            "argument": "<commit>",
+            "arguments": "<commit>",
+            "description": "The commit to compare against. If not specified, the working tree is compared against HEAD."
         },
         {
             "argument": "<path>...",
