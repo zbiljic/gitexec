@@ -177,9 +177,6 @@ type RevListOptions struct {
 	// --progress=<header>
 	// Show progress reports on stderr as objects are considered.
 	Progress string
-	// <paths>
-	// Commits modifying the given <paths> are selected.
-	Paths string
 	// --simplify-by-decoration
 	// Commits that are referred by some branch or tag are selected.
 	SimplifyByDecoration bool
@@ -333,6 +330,15 @@ type RevListOptions struct {
 	// --count
 	// Print a number stating how many commits would have been listed, and suppress all other output.
 	Count bool
+	// <commit>
+	// The commit to compare against. If not specified, the working tree is compared against HEAD.
+	Commit string
+	// --
+	// Do not interpret any more arguments as options.
+	DoNotInterpretMoreArgumentsAsOptions bool
+	// <path>...
+	// Commits modifying the given <paths> are selected.
+	Path []string
 }
 
 func RevListCmd(opts *RevListOptions) *exec.Cmd {
@@ -491,9 +497,6 @@ func RevListCmd(opts *RevListOptions) *exec.Cmd {
 	if opts.Progress != "" {
 		args = append(args, fmt.Sprintf("--progress=%s", opts.Progress))
 	}
-	if opts.Paths != "" {
-		args = append(args, opts.Paths)
-	}
 	if opts.SimplifyByDecoration {
 		args = append(args, "--simplify-by-decoration")
 	}
@@ -646,6 +649,15 @@ func RevListCmd(opts *RevListOptions) *exec.Cmd {
 	}
 	if opts.Count {
 		args = append(args, "--count")
+	}
+	if opts.Commit != "" {
+		args = append(args, opts.Commit)
+	}
+	if opts.DoNotInterpretMoreArgumentsAsOptions {
+		args = append(args, "--")
+	}
+	if opts.Path != nil {
+		args = append(args, opts.Path...)
 	}
 
 	return execGit(opts.CmdDir, args)

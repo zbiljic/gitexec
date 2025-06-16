@@ -258,7 +258,7 @@ type LogOptions struct {
 	// --pretty[=<format>]
 	// --format=<format>
 	// Pretty-print commits using formats such as oneline, short, medium, full, fuller, reference, email, raw, format:<string> or tformat:<string>.
-	Pretty string
+	Format string
 	// --abbrev-commit
 	// Show abbreviated commit object names instead of full 40-byte hashes.
 	AbbrevCommit bool
@@ -546,8 +546,8 @@ func LogCmd(opts *LogOptions) *exec.Cmd {
 	if opts.DoWalk {
 		args = append(args, "--do-walk")
 	}
-	if opts.Pretty != "" {
-		args = append(args, fmt.Sprintf("--pretty=%s", opts.Pretty))
+	if opts.Format != "" {
+		args = append(args, fmt.Sprintf("--format=%s", opts.Format))
 	}
 	if opts.AbbrevCommit {
 		args = append(args, "--abbrev-commit")
