@@ -259,7 +259,7 @@ type DiffOptions struct {
 	IgnoreMatchingLines string
 	// --inter-hunk-context=<number>
 	// Show the context between diff hunks, up to the specified <number> of lines, thereby fusing hunks that are close to each other.
-	InterHunkContext string
+	InterHunkContext uint64
 	// -W
 	// --function-context
 	// Show whole function as context lines for each change.
@@ -551,8 +551,8 @@ func DiffCmd(opts *DiffOptions) *exec.Cmd {
 	if opts.IgnoreMatchingLines != "" {
 		args = append(args, fmt.Sprintf("--ignore-matching-lines=%s", opts.IgnoreMatchingLines))
 	}
-	if opts.InterHunkContext != "" {
-		args = append(args, fmt.Sprintf("--inter-hunk-context=%s", opts.InterHunkContext))
+	if opts.InterHunkContext > 0 {
+		args = append(args, fmt.Sprintf("--inter-hunk-context=%d", opts.InterHunkContext))
 	}
 	if opts.FunctionContext {
 		args = append(args, "--function-context")

@@ -17,10 +17,10 @@ type RevListOptions struct {
 	// -n <number>
 	// --max-count=<number>
 	// Limit the number of commits to output.
-	MaxCount string
+	MaxCount uint64
 	// --skip=<number>
 	// Skip number commits before starting to show the commit output.
-	Skip string
+	Skip uint64
 	// --since=<date>
 	// --after=<date>
 	// Show commits more recent than a specific date.
@@ -84,10 +84,10 @@ type RevListOptions struct {
 	NoMerges bool
 	// --min-parents=<number>
 	// Show only commits which have at least that many parent commits.
-	MinParents string
+	MinParents uint64
 	// --max-parents=<number>
 	// Show only commits which have at most that many parent commits.
-	MaxParents string
+	MaxParents uint64
 	// --no-min-parents
 	// Resets the min-parents limit.
 	NoMinParents bool
@@ -338,11 +338,11 @@ type RevListOptions struct {
 func RevListCmd(opts *RevListOptions) *exec.Cmd {
 	args := []string{"rev-list"}
 
-	if opts.MaxCount != "" {
-		args = append(args, fmt.Sprintf("--max-count=%s", opts.MaxCount))
+	if opts.MaxCount > 0 {
+		args = append(args, fmt.Sprintf("--max-count=%d", opts.MaxCount))
 	}
-	if opts.Skip != "" {
-		args = append(args, fmt.Sprintf("--skip=%s", opts.Skip))
+	if opts.Skip > 0 {
+		args = append(args, fmt.Sprintf("--skip=%d", opts.Skip))
 	}
 	if opts.Since != "" {
 		args = append(args, fmt.Sprintf("--since=%s", opts.Since))
@@ -398,11 +398,11 @@ func RevListCmd(opts *RevListOptions) *exec.Cmd {
 	if opts.NoMerges {
 		args = append(args, "--no-merges")
 	}
-	if opts.MinParents != "" {
-		args = append(args, fmt.Sprintf("--min-parents=%s", opts.MinParents))
+	if opts.MinParents > 0 {
+		args = append(args, fmt.Sprintf("--min-parents=%d", opts.MinParents))
 	}
-	if opts.MaxParents != "" {
-		args = append(args, fmt.Sprintf("--max-parents=%s", opts.MaxParents))
+	if opts.MaxParents > 0 {
+		args = append(args, fmt.Sprintf("--max-parents=%d", opts.MaxParents))
 	}
 	if opts.NoMinParents {
 		args = append(args, "--no-min-parents")

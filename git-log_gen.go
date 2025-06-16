@@ -70,10 +70,10 @@ type LogOptions struct {
 	// -n <number>
 	// --max-count=<number>
 	// Limit the number of commits to output.
-	MaxCount string
+	MaxCount uint64
 	// --skip=<number>
 	// Skip <number> commits before starting to show the commit output.
-	Skip string
+	Skip uint64
 	// --since=<date>
 	// --after=<date>
 	// Show commits more recent than a specific date.
@@ -133,10 +133,10 @@ type LogOptions struct {
 	NoMerges bool
 	// --min-parents=<number>
 	// Show only commits with **at least** <number> parents.
-	MinParents string
+	MinParents uint64
 	// --max-parents=<number>
 	// Show only commits with **at most** <number> parents.
-	MaxParents string
+	MaxParents uint64
 	// --no-min-parents
 	// Remove any minimum-parent constraint (no lower limit).
 	NoMinParents bool
@@ -366,11 +366,11 @@ func LogCmd(opts *LogOptions) *exec.Cmd {
 	if opts.Path != nil {
 		args = append(args, opts.Path...)
 	}
-	if opts.MaxCount != "" {
-		args = append(args, fmt.Sprintf("--max-count=%s", opts.MaxCount))
+	if opts.MaxCount > 0 {
+		args = append(args, fmt.Sprintf("--max-count=%d", opts.MaxCount))
 	}
-	if opts.Skip != "" {
-		args = append(args, fmt.Sprintf("--skip=%s", opts.Skip))
+	if opts.Skip > 0 {
+		args = append(args, fmt.Sprintf("--skip=%d", opts.Skip))
 	}
 	if opts.Since != "" {
 		args = append(args, fmt.Sprintf("--since=%s", opts.Since))
@@ -423,11 +423,11 @@ func LogCmd(opts *LogOptions) *exec.Cmd {
 	if opts.NoMerges {
 		args = append(args, "--no-merges")
 	}
-	if opts.MinParents != "" {
-		args = append(args, fmt.Sprintf("--min-parents=%s", opts.MinParents))
+	if opts.MinParents > 0 {
+		args = append(args, fmt.Sprintf("--min-parents=%d", opts.MinParents))
 	}
-	if opts.MaxParents != "" {
-		args = append(args, fmt.Sprintf("--max-parents=%s", opts.MaxParents))
+	if opts.MaxParents > 0 {
+		args = append(args, fmt.Sprintf("--max-parents=%d", opts.MaxParents))
 	}
 	if opts.NoMinParents {
 		args = append(args, "--no-min-parents")
