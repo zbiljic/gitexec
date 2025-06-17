@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strconv"
 	"strings"
 	"unicode"
@@ -231,30 +232,52 @@ func (g *Generator) generateOptionChecks(cmd CommandDoc) []jen.Code {
 		fieldName := optionToFieldName(opt.Argument)
 		fieldType := determineFieldType(opt.Argument)
 
+		// Extract option name
+		optName := ""
+		switch {
+		case !strings.HasPrefix(opt.Argument, "-"):
+			optName = opt.Argument
+		case strings.Contains(opt.Argument, "<n>"),
+			strings.Contains(opt.Argument, "<num>"),
+			strings.Contains(opt.Argument, "<number>"):
+			optName = strings.Split(opt.Argument, "<n")[0]
+			optName = strings.ReplaceAll(optName, "[", "")
+		case strings.Contains(opt.Argument, "[="):
+			optName = strings.Split(opt.Argument, "[=")[0]
+		case strings.Contains(opt.Argument, "[<"):
+			optName = strings.Split(opt.Argument, "[<")[0]
+		case strings.Contains(opt.Argument, "=<"), strings.Contains(opt.Argument, "=["):
+			optName = strings.Split(opt.Argument, "=")[0]
+		case strings.Contains(opt.Argument, "[=<"):
+			optName = strings.Split(opt.Argument, "[")[0]
+		case strings.Contains(opt.Argument, "=("):
+			optName = strings.Split(opt.Argument, "=(")[0]
+		case strings.Contains(opt.Argument, " <"):
+			optName = strings.Split(opt.Argument, " ")[0]
+		case strings.Contains(opt.Argument, "<"):
+			optName = strings.Split(opt.Argument, "<")[0]
+		default:
+			optName = opt.Argument
+		}
+
+		// Build the statement
 		switch {
 		case !strings.HasPrefix(opt.Argument, "-"):
 			// Handle command arguments
 			switch fieldType {
 			case "[]string":
-				// Handle arguments with multiple options
 				statements = append(statements, jen.If(jen.Id("opts").Dot(fieldName).Op("!=").Nil()).Block(
 					jen.Id("args").Op("=").Id("append").Call(jen.Id("args"), jen.Id("opts").Dot(fieldName).Op("...")),
 				))
 			case "string":
 				fallthrough
 			default:
-				// Handle arguments with a single option
 				statements = append(statements, jen.If(jen.Id("opts").Dot(fieldName).Op("!=").Lit("")).Block(
 					jen.Id("args").Op("=").Id("append").Call(jen.Id("args"), jen.Id("opts").Dot(fieldName)),
 				))
 			}
-		case strings.Contains(opt.Argument, "<n>"):
-			fallthrough
-		case strings.Contains(opt.Argument, "<num>"):
-			fallthrough
-		case strings.Contains(opt.Argument, "<number>"):
-			optName := strings.Split(opt.Argument, "<n")[0]
-			optName = strings.ReplaceAll(optName, "[", "")
+		case fieldType == "int", fieldType == "uint64":
+			// Handle options with number values
 			statements = append(statements, jen.If(jen.Id("opts").Dot(fieldName).Op(">").Lit(0)).Block(
 				jen.Id("args").Op("=").Id("append").Call(
 					jen.Id("args"),
@@ -264,21 +287,19 @@ func (g *Generator) generateOptionChecks(cmd CommandDoc) []jen.Code {
 					),
 				),
 			))
-		case strings.Contains(opt.Argument, "[="):
-			// Handle options with optional values, like "--recurse-submodules[=(yes|on-demand|no)]"
-			optName := strings.Split(opt.Argument, "[=")[0]
-			statements = append(statements, jen.If(jen.Id("opts").Dot(fieldName).Op("!=").Lit("")).Block(
+		case fieldType == "bool":
+			// Handle boolean flags
+			statements = append(statements, jen.If(jen.Id("opts").Dot(fieldName)).Block(
 				jen.Id("args").Op("=").Id("append").Call(
 					jen.Id("args"),
-					jen.Qual("fmt", "Sprintf").Call(
-						jen.Lit(optName+"=%s"),
-						jen.Id("opts").Dot(fieldName),
-					),
+					jen.Lit(optName),
 				),
 			))
-		case strings.Contains(opt.Argument, "=<"), strings.Contains(opt.Argument, "=["):
+		case strings.Contains(opt.Argument, "[="),
+			strings.Contains(opt.Argument, "=<"),
+			strings.Contains(opt.Argument, "=["),
+			strings.Contains(opt.Argument, "=("):
 			// Handle options with values using equals sign
-			optName := strings.Split(opt.Argument, "=")[0]
 			statements = append(statements, jen.If(jen.Id("opts").Dot(fieldName).Op("!=").Lit("")).Block(
 				jen.Id("args").Op("=").Id("append").Call(
 					jen.Id("args"),
@@ -289,23 +310,13 @@ func (g *Generator) generateOptionChecks(cmd CommandDoc) []jen.Code {
 				),
 			))
 		case strings.Contains(opt.Argument, " <"):
-			// Handle options with space-separated values like "--origin <name>"
-			optName := strings.Split(opt.Argument, " ")[0]
+			// Handle options with space-separated values
 			statements = append(statements, jen.If(jen.Id("opts").Dot(fieldName).Op("!=").Lit("")).Block(
 				jen.Id("args").Op("=").Id("append").Call(jen.Id("args"), jen.Lit(optName)),
 				jen.Id("args").Op("=").Id("append").Call(jen.Id("args"), jen.Id("opts").Dot(fieldName)),
 			))
-		case strings.HasPrefix(opt.Argument, "--no-"):
-			// Handle negative boolean flags
-			statements = append(statements, jen.If(jen.Id("opts").Dot(fieldName)).Block(
-				jen.Id("args").Op("=").Id("append").Call(
-					jen.Id("args"),
-					jen.Lit(opt.Argument),
-				),
-			))
 		case strings.Contains(opt.Argument, "[=<"):
-			// Handle options with optional values like "--recurse-submodules[=<pathspec>]"
-			optName := strings.Split(opt.Argument, "[")[0]
+			// Handle options with optional values
 			statements = append(statements, jen.If(jen.Id("opts").Dot(fieldName).Op("!=").Lit("")).Block(
 				jen.If(jen.Id("opts").Dot(fieldName).Op("==").Lit("true")).Block(
 					jen.Id("args").Op("=").Id("append").Call(jen.Id("args"), jen.Lit(optName)),
@@ -319,26 +330,19 @@ func (g *Generator) generateOptionChecks(cmd CommandDoc) []jen.Code {
 					),
 				),
 			))
-		case strings.Contains(opt.Argument, "=("):
-			// Handle options with parenthesis like "--path-format=(absolute|relative)"
-			optName := strings.Split(opt.Argument, "=(")[0]
+		case fieldType == "string":
+			// Handle other string options
 			statements = append(statements, jen.If(jen.Id("opts").Dot(fieldName).Op("!=").Lit("")).Block(
 				jen.Id("args").Op("=").Id("append").Call(
 					jen.Id("args"),
 					jen.Qual("fmt", "Sprintf").Call(
-						jen.Lit(optName+"=%s"),
+						jen.Lit(optName+"%s"),
 						jen.Id("opts").Dot(fieldName),
 					),
 				),
 			))
 		default:
-			// Handle regular boolean flags
-			statements = append(statements, jen.If(jen.Id("opts").Dot(fieldName)).Block(
-				jen.Id("args").Op("=").Id("append").Call(
-					jen.Id("args"),
-					jen.Lit(opt.Argument),
-				),
-			))
+			log.Fatalf("unhandled option type: %s for %s", fieldType, opt.Argument)
 		}
 	}
 
@@ -392,9 +396,23 @@ func optionFlagToFieldName(option string) string {
 	}
 
 	if len(name) == 1 {
-		if unicode.IsDigit(rune(name[0])) {
+		r := rune(name[0])
+		if unicode.IsDigit(r) {
 			num, _ := strconv.Atoi(name)
 			name = num2words.Convert(num)
+		}
+		if len(option) > 1 && (unicode.IsLower(r) || unicode.IsUpper(r)) {
+			// get the rest of the option flag description
+			rest := strings.SplitN(option, name, 2)[1]
+			// remove any non-alphanumeric characters
+			rest = regexp.MustCompile(`[^a-zA-Z0-9\s]+`).ReplaceAllString(rest, "")
+			if len(rest) > 0 && !jen.IsReservedWord(rest) {
+				name += strings.TrimSpace(rest)
+				// check if the first two characters are the same and if so, remove the second one
+				if strings.EqualFold(name[:1], name[1:2]) {
+					name = name[:1] + name[2:]
+				}
+			}
 		}
 	}
 
@@ -430,9 +448,11 @@ func determineFieldType(option string) string {
 	}
 
 	// Options with values are represented as numbers
-	if strings.Contains(option, "<n>") ||
-		strings.Contains(option, "<num>") ||
+	if strings.Contains(option, "<num>") ||
 		strings.Contains(option, "<number>") {
+		return "int"
+	}
+	if strings.Contains(option, "<n>") {
 		return "uint64"
 	}
 
@@ -442,7 +462,7 @@ func determineFieldType(option string) string {
 	}
 
 	// Options with space-separated values like "--origin <name>"
-	if strings.Contains(option, " <") {
+	if strings.Contains(option, " <") || strings.HasSuffix(option, ">") {
 		return "string"
 	}
 
