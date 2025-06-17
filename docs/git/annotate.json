@@ -1,0 +1,136 @@
+{
+    "command_name": "annotate",
+    "description": "Annotate file lines with commit information",
+    "options": [
+        {
+            "argument": "-b",
+            "arguments": "-b",
+            "description": "Show blank SHA-1 for boundary commits. This can also be controlled via the blame.blankBoundary config option."
+        },
+        {
+            "argument": "--root",
+            "arguments": "--root",
+            "description": "Do not treat root commits as boundaries. This can also be controlled via the blame.showRoot config option."
+        },
+        {
+            "argument": "--show-stats",
+            "arguments": "--show-stats",
+            "description": "Include additional statistics at the end of the output."
+        },
+        {
+            "argument": "-L <start>,<end>",
+            "arguments": "-L <start>,<end>, -L :<funcname>",
+            "description": "Annotate only the line range given by <start>,<end>, or by the function name regex <funcname>. May be specified multiple times. Overlapping ranges are allowed."
+        },
+        {
+            "argument": "-l",
+            "arguments": "-l",
+            "description": "Show long revision (default: off)."
+        },
+        {
+            "argument": "-t",
+            "arguments": "-t",
+            "description": "Show raw timestamp (default: off)."
+        },
+        {
+            "argument": "-S <revs-file>",
+            "arguments": "-S <revs-file>",
+            "description": "Use revisions from revs-file instead of calling git-rev-list."
+        },
+        {
+            "argument": "--reverse <rev>..<rev>",
+            "arguments": "--reverse <rev>..<rev>",
+            "description": "Walk history forward instead of backward, showing the last revision in which a line has existed. Requires a range of revisions where the path exists in the start revision."
+        },
+        {
+            "argument": "--first-parent",
+            "arguments": "--first-parent",
+            "description": "Follow only the first parent commit upon seeing a merge commit. Useful for determining when a line was introduced to a particular integration branch."
+        },
+        {
+            "argument": "--porcelain",
+            "arguments": "-p, --porcelain",
+            "description": "Show in a format designed for machine consumption."
+        },
+        {
+            "argument": "--line-porcelain",
+            "arguments": "--line-porcelain",
+            "description": "Show the porcelain format with commit information for each line, not just the first time a commit is referenced. Implies --porcelain."
+        },
+        {
+            "argument": "--incremental",
+            "arguments": "--incremental",
+            "description": "Show the result incrementally in a format designed for machine consumption."
+        },
+        {
+            "argument": "--encoding=<encoding>",
+            "arguments": "--encoding=<encoding>",
+            "description": "Specifies the encoding used to output author names and commit summaries. Set to 'none' for unconverted data."
+        },
+        {
+            "argument": "--contents <file>",
+            "arguments": "--contents <file>",
+            "description": "Annotate using the contents from the named file, starting from <rev> if specified, and HEAD otherwise. Use - to read from standard input."
+        },
+        {
+            "argument": "--date=<format>",
+            "arguments": "--date=<format>",
+            "description": "Specifies the format used to output dates. If not provided, uses blame.date config or defaults to 'iso' format."
+        },
+        {
+            "argument": "--progress",
+            "arguments": "--progress",
+            "description": "Show progress status on stderr. Enabled by default when attached to a terminal. Can't be used with --porcelain or --incremental."
+        },
+        {
+            "argument": "--no-progress",
+            "arguments": "--no-progress",
+            "description": "Do not show progress status on stderr."
+        },
+        {
+            "argument": "-M[<num>]",
+            "arguments": "-M[<num>]",
+            "description": "Detect moved or copied lines within a file. Optional <num> is the lower bound of alphanumeric characters that must be detected as moving/copying (default: 20)."
+        },
+        {
+            "argument": "-C[<num>]",
+            "arguments": "-C[<num>]",
+            "description": "In addition to -M, detect lines moved or copied from other files modified in the same commit. Optional <num> is the lower bound of alphanumeric characters (default: 40)."
+        },
+        {
+            "argument": "--ignore-rev <rev>",
+            "arguments": "--ignore-rev <rev>",
+            "description": "Ignore changes made by the specified revision when assigning blame. May be specified multiple times."
+        },
+        {
+            "argument": "--ignore-revs-file <file>",
+            "arguments": "--ignore-revs-file <file>",
+            "description": "Ignore revisions listed in the specified file, which must be in the same format as fsck.skipList. Use \"\" to clear the list."
+        },
+        {
+            "argument": "--color-lines",
+            "arguments": "--color-lines",
+            "description": "Color line annotations differently if they come from the same commit as the preceding line. Color defaults to cyan and can be adjusted via color.blame.repeatedLines."
+        },
+        {
+            "argument": "--color-by-age",
+            "arguments": "--color-by-age",
+            "description": "Color line annotations based on the line's age. Colors are controlled by color.blame.highlightRecent."
+        },
+        {
+            "argument": "-h",
+            "arguments": "-h",
+            "description": "Show help message."
+        },
+        {
+            "argument": "--",
+            "arguments": "--",
+            "description": "Do not interpret any more arguments as options."
+        },
+        {
+            "argument": "<file>",
+            "arguments": "<file>",
+            "description": "The file on which to operate."
+        }
+    ]
+}

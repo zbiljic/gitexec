@@ -1,0 +1,261 @@
+{
+    "command_name": "rebase",
+    "description": "Reapply commits on top of another base tip",
+    "options": [
+        {
+            "argument": "--continue",
+            "arguments": "--continue",
+            "description": "Restart the rebasing process after having resolved a merge conflict."
+        },
+        {
+            "argument": "--skip",
+            "arguments": "--skip",
+            "description": "Restart the rebasing process by skipping the current patch."
+        },
+        {
+            "argument": "--abort",
+            "arguments": "--abort",
+            "description": "Abort the rebase operation and reset HEAD to the original branch."
+        },
+        {
+            "argument": "--quit",
+            "arguments": "--quit",
+            "description": "Abort the rebase operation but HEAD is not reset back to the original branch."
+        },
+        {
+            "argument": "--edit-todo",
+            "arguments": "--edit-todo",
+            "description": "Edit the todo list during an interactive rebase."
+        },
+        {
+            "argument": "--show-current-patch",
+            "arguments": "--show-current-patch",
+            "description": "Show the current patch in an interactive rebase or when stopped."
+        },
+        {
+            "argument": "--onto <newbase>",
+            "arguments": "--onto <newbase>",
+            "description": "Starting point at which to create the new commits. If not specified, the starting point is <upstream>."
+        },
+        {
+            "argument": "--keep-base",
+            "arguments": "--keep-base",
+            "description": "Set the starting point to the merge base of <upstream> and <branch>."
+        },
+        {
+            "argument": "--apply",
+            "arguments": "--apply",
+            "description": "Use applying strategies to rebase (calling git-am internally)."
+        },
+        {
+            "argument": "--empty={drop,keep,ask}",
+            "arguments": "--empty={drop,keep,ask}",
+            "description": "How to handle commits that become empty (default: drop). 'keep' keeps empty commits, 'drop' drops them, 'ask' prompts for each."
+        },
+        {
+            "argument": "--no-keep-empty",
+            "arguments": "--no-keep-empty",
+            "description": "Do not keep commits that start empty before the rebase."
+        },
+        {
+            "argument": "--keep-empty",
+            "arguments": "--keep-empty",
+            "description": "Keep commits that start empty before the rebase."
+        },
+        {
+            "argument": "--reapply-cherry-picks",
+            "arguments": "--reapply-cherry-picks",
+            "description": "Reapply all clean cherry-picks of any upstream commit instead of preemptively dropping them."
+        },
+        {
+            "argument": "--no-reapply-cherry-picks",
+            "arguments": "--no-reapply-cherry-picks",
+            "description": "Do not reapply all clean cherry-picks of any upstream commit instead of preemptively dropping them."
+        },
+        {
+            "argument": "--merge",
+            "arguments": "-m, --merge",
+            "description": "Use merging strategies to rebase (default)."
+        },
+        {
+            "argument": "--strategy=<strategy>",
+            "arguments": "-s <strategy>, --strategy=<strategy>",
+            "description": "Use the given merge strategy. Implies --merge."
+        },
+        {
+            "argument": "--strategy-option=<strategy-option>",
+            "arguments": "-X <strategy-option>, --strategy-option=<strategy-option>",
+            "description": "Pass the <strategy-option> through to the merge strategy."
+        },
+        {
+            "argument": "--rerere-autoupdate",
+            "arguments": "--rerere-autoupdate",
+            "description": "Allow the rerere mechanism to update the index with the result of auto-conflict resolution."
+        },
+        {
+            "argument": "--no-rerere-autoupdate",
+            "arguments": "--no-rerere-autoupdate",
+            "description": "Do not allow the rerere mechanism to update the index with the result of auto-conflict resolution."
+        },
+        {
+            "argument": "--gpg-sign[=<keyid>]",
+            "arguments": "-S[<keyid>], --gpg-sign[=<keyid>]",
+            "description": "GPG-sign commits. The keyid argument is optional and defaults to the committer identity."
+        },
+        {
+            "argument": "--no-gpg-sign",
+            "arguments": "--no-gpg-sign",
+            "description": "Do not GPG-sign the resulting merge commit. Useful to countermand both commit.gpgSign configuration variable, and earlier --gpg-sign."
+        },
+        {
+            "argument": "--quiet",
+            "arguments": "-q, --quiet",
+            "description": "Be quiet. Implies --no-stat."
+        },
+        {
+            "argument": "--verbose",
+            "arguments": "-v, --verbose",
+            "description": "Be verbose. Implies --stat."
+        },
+        {
+            "argument": "--stat",
+            "arguments": "--stat",
+            "description": "Show a diffstat of what changed upstream since the last rebase."
+        },
+        {
+            "argument": "--no-stat",
+            "arguments": "-n, --no-stat",
+            "description": "Do not show a diffstat as part of the rebase process."
+        },
+        {
+            "argument": "--no-verify",
+            "arguments": "--no-verify",
+            "description": "Bypass the pre-rebase hook."
+        },
+        {
+            "argument": "--verify",
+            "arguments": "--verify",
+            "description": "Allows the pre-rebase hook to run, which is the default."
+        },
+        {
+            "argument": "-C<n>",
+            "arguments": "-C<n>",
+            "description": "Ensure at least <n> lines of surrounding context match before and after each change."
+        },
+        {
+            "argument": "--force-rebase",
+            "arguments": "-f, --no-ff, --force-rebase",
+            "description": "Force the rebase even if the current branch is a descendant of the commit you are rebasing onto."
+        },
+        {
+            "argument": "--fork-point",
+            "arguments": "--fork-point",
+            "description": "Use reflog to find a better common ancestor between <upstream> and <branch>."
+        },
+        {
+            "argument": "--no-fork-point",
+            "arguments": "--no-fork-point",
+            "description": "Do not use reflog to find a better common ancestor between <upstream> and <branch>."
+        },
+        {
+            "argument": "--ignore-whitespace",
+            "arguments": "--ignore-whitespace",
+            "description": "Ignore whitespace differences when trying to reconcile differences."
+        },
+        {
+            "argument": "--whitespace=<option>",
+            "arguments": "--whitespace=<option>",
+            "description": "Ignore whitespace differences when trying to reconcile differences."
+        },
+        {
+            "argument": "--committer-date-is-author-date",
+            "arguments": "--committer-date-is-author-date",
+            "description": "Use the author date of the commit being rebased as the committer date."
+        },
+        {
+            "argument": "--reset-author-date",
+            "arguments": "--ignore-date, --reset-author-date",
+            "description": "Use the current time as the author date of the rebased commit."
+        },
+        {
+            "argument": "--signoff",
+            "arguments": "--signoff",
+            "description": "Add a Signed-off-by trailer to all the rebased commits."
+        },
+        {
+            "argument": "--interactive",
+            "arguments": "-i, --interactive",
+            "description": "Make a list of commits to be rebased, let the user edit the list before proceeding. This mode can also be used to split commits."
+        },
+        {
+            "argument": "--rebase-merges[=mode]",
+            "arguments": "--rebase-merges[=mode]",
+            "description": "Preserve merge commits during rebase (mode can be 'rebase-cousins' or 'no-rebase-cousins')."
+        },
+        {
+            "argument": "--no-rebase-merges",
+            "arguments": "--no-rebase-merges",
+            "description": "Do not preserve merge commits during rebase."
+        },
+        {
+            "argument": "--exec <cmd>",
+            "arguments": "-x <cmd>, --exec <cmd>",
+            "description": "Append 'exec <cmd>' after each line creating a commit in the final history."
+        },
+        {
+            "argument": "--root",
+            "arguments": "--root",
+            "description": "Rebase all commits reachable from <branch>, instead of limiting them with an <upstream>."
+        },
+        {
+            "argument": "--autosquash",
+            "arguments": "--autosquash",
+            "description": "Automatically squash commits with specially formatted messages into previous commits."
+        },
+        {
+            "argument": "--no-autosquash",
+            "arguments": "--no-autosquash",
+            "description": "Do not automatically squash commits with specially formatted messages into previous commits."
+        },
+        {
+            "argument": "--autostash",
+            "arguments": "--autostash",
+            "description": "Automatically create a temporary stash entry before the operation begins."
+        },
+        {
+            "argument": "--no-autostash",
+            "arguments": "--no-autostash",
+            "description": "Do not automatically create a temporary stash entry before the operation begins."
+        },
+        {
+            "argument": "--reschedule-failed-exec",
+            "arguments": "--reschedule-failed-exec",
+            "description": "Automatically reschedule exec commands that failed."
+        },
+        {
+            "argument": "--no-reschedule-failed-exec",
+            "arguments": "--no-reschedule-failed-exec",
+            "description": "Do not automatically reschedule exec commands that failed."
+        },
+        {
+            "argument": "--update-refs",
+            "arguments": "--update-refs",
+            "description": "Automatically force-update any branches that point to commits that are being rebased."
+        },
+        {
+            "argument": "--no-update-refs",
+            "arguments": "--no-update-refs",
+            "description": "Do not automatically force-update any branches that point to commits that are being rebased."
+        },
+        {
+            "argument": "<upstream>",
+            "arguments": "<upstream>",
+            "description": "Upstream branch to compare against. Defaults to the configured upstream for the current branch."
+        },
+        {
+            "argument": "<branch>",
+            "arguments": "<branch>",
+            "description": "Working branch; defaults to HEAD."
+        }
+    ]
+}
