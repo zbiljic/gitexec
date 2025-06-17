@@ -101,6 +101,11 @@
             "argument": "--",
             "arguments": "--",
             "description": "Separate command-line options from the list of files."
+        },
+        {
+            "argument": "<pathspec>...",
+            "arguments": "<pathspec>...",
+            "description": "Files to add content from. Fileglobs (e.g. *.c) can be given to add all matching files."
         }
     ]
 }
