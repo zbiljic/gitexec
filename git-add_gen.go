@@ -84,6 +84,9 @@ type AddOptions struct {
 	// --
 	// Separate command-line options from the list of files.
 	DoNotInterpretMoreArgumentsAsOptions bool
+	// <pathspec>...
+	// Files to add content from. Fileglobs (e.g. *.c) can be given to add all matching files.
+	Pathspec []string
 }
 
 func AddCmd(opts *AddOptions) *exec.Cmd {
@@ -148,6 +151,9 @@ func AddCmd(opts *AddOptions) *exec.Cmd {
 	}
 	if opts.DoNotInterpretMoreArgumentsAsOptions {
 		args = append(args, "--")
+	}
+	if opts.Pathspec != nil {
+		args = append(args, opts.Pathspec...)
 	}
 
 	return execGit(opts.CmdDir, args)
