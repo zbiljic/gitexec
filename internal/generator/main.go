@@ -9,6 +9,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 	"unicode"
@@ -28,13 +29,16 @@ var (
 
 // CommandDoc represents the structure of a Git command documentation in JSON
 type CommandDoc struct {
-	CommandName string `json:"command_name"`
+	CommandName string             `json:"command_name"`
+	Description string             `json:"description"`
+	Options     []CommandOptionDoc `json:"options"`
+}
+
+// CommandOptionDoc represents a single command line option or argument
+type CommandOptionDoc struct {
+	Argument    string `json:"argument"`
+	Arguments   string `json:"arguments"`
 	Description string `json:"description"`
-	Options     []struct {
-		Argument    string `json:"argument"`
-		Arguments   string `json:"arguments"`
-		Description string `json:"description"`
-	} `json:"options"`
 }
 
 func main() {
@@ -228,7 +232,18 @@ func (g *Generator) generateCode(cmd CommandDoc, tags []string) {
 func (g *Generator) generateOptionChecks(cmd CommandDoc) []jen.Code {
 	var statements []jen.Code
 
-	for _, opt := range cmd.Options {
+	// Create a copy of options to avoid modifying the original
+	options := make([]CommandOptionDoc, len(cmd.Options))
+	copy(options, cmd.Options)
+
+	// Move non-flag options to the end, in-place, preserving order.
+	sort.SliceStable(options, func(a, b int) bool {
+		isFlagA := strings.HasPrefix(options[a].Argument, "-") && options[a].Argument != "--"
+		isFlagB := strings.HasPrefix(options[b].Argument, "-") && options[b].Argument != "--"
+		return isFlagA && !isFlagB
+	})
+
+	for _, opt := range options {
 		fieldName := optionToFieldName(opt.Argument)
 		fieldType := determineFieldType(opt.Argument)
 
