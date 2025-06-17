@@ -244,6 +244,17 @@ func BranchCmd(opts *BranchOptions) *exec.Cmd {
 	if opts.NoMerged {
 		args = append(args, "--no-merged ")
 	}
+	if opts.Sort != "" {
+		args = append(args, fmt.Sprintf("--sort=%s", opts.Sort))
+	}
+	if opts.PointsAt != "" {
+		args = append(args, "--points-at")
+		args = append(args, opts.PointsAt)
+	}
+	if opts.Format != "" {
+		args = append(args, "--format")
+		args = append(args, opts.Format)
+	}
 	if opts.Branchname != "" {
 		args = append(args, opts.Branchname)
 	}
@@ -255,17 +266,6 @@ func BranchCmd(opts *BranchOptions) *exec.Cmd {
 	}
 	if opts.Newbranch != "" {
 		args = append(args, opts.Newbranch)
-	}
-	if opts.Sort != "" {
-		args = append(args, fmt.Sprintf("--sort=%s", opts.Sort))
-	}
-	if opts.PointsAt != "" {
-		args = append(args, "--points-at")
-		args = append(args, opts.PointsAt)
-	}
-	if opts.Format != "" {
-		args = append(args, "--format")
-		args = append(args, opts.Format)
 	}
 	if opts.Pattern != nil {
 		args = append(args, opts.Pattern...)

@@ -328,6 +328,9 @@ func FetchCmd(opts *FetchOptions) *exec.Cmd {
 	if opts.Ipv6 {
 		args = append(args, "--ipv6")
 	}
+	if opts.Stdin {
+		args = append(args, "--stdin")
+	}
 	if opts.Repository != "" {
 		args = append(args, opts.Repository)
 	}
@@ -336,9 +339,6 @@ func FetchCmd(opts *FetchOptions) *exec.Cmd {
 	}
 	if opts.Refspec != "" {
 		args = append(args, opts.Refspec)
-	}
-	if opts.Stdin {
-		args = append(args, "--stdin")
 	}
 
 	return execGit(opts.CmdDir, args)

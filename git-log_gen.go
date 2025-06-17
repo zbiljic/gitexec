@@ -357,15 +357,6 @@ func LogCmd(opts *LogOptions) *exec.Cmd {
 	if opts.Lstartendfile != "" {
 		args = append(args, fmt.Sprintf("-L%s", opts.Lstartendfile))
 	}
-	if opts.RevisionRange != "" {
-		args = append(args, opts.RevisionRange)
-	}
-	if opts.DoNotInterpretMoreArgumentsAsOptions {
-		args = append(args, "--")
-	}
-	if opts.Path != nil {
-		args = append(args, opts.Path...)
-	}
 	if opts.MaxCount > 0 {
 		args = append(args, fmt.Sprintf("--max-count=%d", opts.MaxCount))
 	}
@@ -504,9 +495,6 @@ func LogCmd(opts *LogOptions) *exec.Cmd {
 	if opts.Boundary {
 		args = append(args, "--boundary")
 	}
-	if opts.Paths != "" {
-		args = append(args, opts.Paths)
-	}
 	if opts.SimplifyByDecoration {
 		args = append(args, "--simplify-by-decoration")
 	}
@@ -599,6 +587,18 @@ func LogCmd(opts *LogOptions) *exec.Cmd {
 	}
 	if opts.ShowLinearBreak != "" {
 		args = append(args, fmt.Sprintf("--show-linear-break=%s", opts.ShowLinearBreak))
+	}
+	if opts.RevisionRange != "" {
+		args = append(args, opts.RevisionRange)
+	}
+	if opts.DoNotInterpretMoreArgumentsAsOptions {
+		args = append(args, "--")
+	}
+	if opts.Path != nil {
+		args = append(args, opts.Path...)
+	}
+	if opts.Paths != "" {
+		args = append(args, opts.Paths)
 	}
 
 	return execGit(opts.CmdDir, args)
