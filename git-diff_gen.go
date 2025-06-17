@@ -195,16 +195,16 @@ type DiffOptions struct {
 	IrreversibleDelete bool
 	// -l<num>
 	// This option prevents the exhaustive portion of rename/copy detection from running if the number of source/destination files involved exceeds the specified number.
-	L uint64
+	Lnum int
 	// --diff-filter=[(A|C|D|M|R|T|U|X|B)...[*]]
 	// Select only files that are Added (A), Copied (C), Deleted (D), Modified (M), Renamed (R), have their type (i.e. regular file, symlink, submodule, …​) changed (T), are Unmerged (U), are Unknown (X), or have had their pairing Broken (B). Any combination of the filter characters (including none) can be used.
 	DiffFilter string
 	// -S<string>
 	// Look for differences that change the number of occurrences of the specified <string> (i.e. addition/deletion) in a file. Intended for the scripter's use.
-	S bool
+	S string
 	// -G<regex>
 	// Look for differences whose patch text contains added/removed lines that match <regex>.
-	G bool
+	Gregex string
 	// --find-object=<object-id>
 	// Look for differences that change the number of occurrences of the specified object. Similar to -S, just the argument is different in that it doesn't search for a specific string but for a specific object id.
 	FindObject string
@@ -216,7 +216,7 @@ type DiffOptions struct {
 	PickaxeRegex bool
 	// -O<orderfile>
 	// Control the order in which files appear in the output.
-	O bool
+	Orderfile string
 	// --skip-to=<file>
 	// Discard the files before the named <file> from the output (i.e. skip to).
 	SkipTo string
@@ -259,7 +259,7 @@ type DiffOptions struct {
 	IgnoreMatchingLines string
 	// --inter-hunk-context=<number>
 	// Show the context between diff hunks, up to the specified <number> of lines, thereby fusing hunks that are close to each other.
-	InterHunkContext uint64
+	InterHunkContext int
 	// -W
 	// --function-context
 	// Show whole function as context lines for each change.
@@ -491,17 +491,17 @@ func DiffCmd(opts *DiffOptions) *exec.Cmd {
 	if opts.IrreversibleDelete {
 		args = append(args, "--irreversible-delete")
 	}
-	if opts.L > 0 {
-		args = append(args, fmt.Sprintf("-l%d", opts.L))
+	if opts.Lnum > 0 {
+		args = append(args, fmt.Sprintf("-l%d", opts.Lnum))
 	}
 	if opts.DiffFilter != "" {
 		args = append(args, fmt.Sprintf("--diff-filter=%s", opts.DiffFilter))
 	}
-	if opts.S {
-		args = append(args, "-S<string>")
+	if opts.S != "" {
+		args = append(args, fmt.Sprintf("-S%s", opts.S))
 	}
-	if opts.G {
-		args = append(args, "-G<regex>")
+	if opts.Gregex != "" {
+		args = append(args, fmt.Sprintf("-G%s", opts.Gregex))
 	}
 	if opts.FindObject != "" {
 		args = append(args, fmt.Sprintf("--find-object=%s", opts.FindObject))
@@ -512,8 +512,8 @@ func DiffCmd(opts *DiffOptions) *exec.Cmd {
 	if opts.PickaxeRegex {
 		args = append(args, "--pickaxe-regex")
 	}
-	if opts.O {
-		args = append(args, "-O<orderfile>")
+	if opts.Orderfile != "" {
+		args = append(args, fmt.Sprintf("-O%s", opts.Orderfile))
 	}
 	if opts.SkipTo != "" {
 		args = append(args, fmt.Sprintf("--skip-to=%s", opts.SkipTo))

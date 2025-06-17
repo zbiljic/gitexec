@@ -233,16 +233,16 @@ func BranchCmd(opts *BranchOptions) *exec.Cmd {
 		args = append(args, "--edit-description")
 	}
 	if opts.Contains {
-		args = append(args, "--contains [<commit>]")
+		args = append(args, "--contains ")
 	}
 	if opts.NoContains {
-		args = append(args, "--no-contains [<commit>]")
+		args = append(args, "--no-contains ")
 	}
 	if opts.Merged {
-		args = append(args, "--merged [<commit>]")
+		args = append(args, "--merged ")
 	}
 	if opts.NoMerged {
-		args = append(args, "--no-merged [<commit>]")
+		args = append(args, "--no-merged ")
 	}
 	if opts.Branchname != "" {
 		args = append(args, opts.Branchname)

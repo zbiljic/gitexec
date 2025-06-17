@@ -17,10 +17,10 @@ type RevListOptions struct {
 	// -n <number>
 	// --max-count=<number>
 	// Limit the number of commits to output.
-	MaxCount uint64
+	MaxCount int
 	// --skip=<number>
 	// Skip number commits before starting to show the commit output.
-	Skip uint64
+	Skip int
 	// --since=<date>
 	// --after=<date>
 	// Show commits more recent than a specific date.
@@ -84,10 +84,10 @@ type RevListOptions struct {
 	NoMerges bool
 	// --min-parents=<number>
 	// Show only commits which have at least that many parent commits.
-	MinParents uint64
+	MinParents int
 	// --max-parents=<number>
 	// Show only commits which have at most that many parent commits.
-	MaxParents uint64
+	MaxParents int
 	// --no-min-parents
 	// Resets the min-parents limit.
 	NoMinParents bool

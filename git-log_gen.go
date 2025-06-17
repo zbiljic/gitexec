@@ -56,7 +56,7 @@ type LogOptions struct {
 	// <end>:<file>
 	// -L:<funcname>:<file>
 	// Trace the evolution of a line range or function within a file. Implies --patch.
-	L bool
+	Lstartendfile string
 	// <revision-range>
 	// Show only commits in the specified revision range. When no <revision-range> is specified, it defaults to HEAD (i.e. the whole history leading to the current commit).
 	RevisionRange string
@@ -70,10 +70,10 @@ type LogOptions struct {
 	// -n <number>
 	// --max-count=<number>
 	// Limit the number of commits to output.
-	MaxCount uint64
+	MaxCount int
 	// --skip=<number>
 	// Skip <number> commits before starting to show the commit output.
-	Skip uint64
+	Skip int
 	// --since=<date>
 	// --after=<date>
 	// Show commits more recent than a specific date.
@@ -133,10 +133,10 @@ type LogOptions struct {
 	NoMerges bool
 	// --min-parents=<number>
 	// Show only commits with **at least** <number> parents.
-	MinParents uint64
+	MinParents int
 	// --max-parents=<number>
 	// Show only commits with **at most** <number> parents.
-	MaxParents uint64
+	MaxParents int
 	// --no-min-parents
 	// Remove any minimum-parent constraint (no lower limit).
 	NoMinParents bool
@@ -354,8 +354,8 @@ func LogCmd(opts *LogOptions) *exec.Cmd {
 	if opts.LogSize {
 		args = append(args, "--log-size")
 	}
-	if opts.L {
-		args = append(args, "-L<start>,<end>:<file>")
+	if opts.Lstartendfile != "" {
+		args = append(args, fmt.Sprintf("-L%s", opts.Lstartendfile))
 	}
 	if opts.RevisionRange != "" {
 		args = append(args, opts.RevisionRange)

@@ -29,7 +29,7 @@ type SymbolicRefOptions struct {
 	NoRecurse bool
 	// -m <reason>
 	// Update the reflog for <name> with <reason>. This is valid only when creating or updating a symbolic ref.
-	M string
+	Mreason string
 	// <name>
 	// The name of the symbolic ref to read, create, or delete. For example HEAD.
 	Name string
@@ -56,9 +56,9 @@ func SymbolicRefCmd(opts *SymbolicRefOptions) *exec.Cmd {
 	if opts.NoRecurse {
 		args = append(args, "--no-recurse")
 	}
-	if opts.M != "" {
+	if opts.Mreason != "" {
 		args = append(args, "-m")
-		args = append(args, opts.M)
+		args = append(args, opts.Mreason)
 	}
 	if opts.Name != "" {
 		args = append(args, opts.Name)
