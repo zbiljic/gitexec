@@ -1,0 +1,176 @@
+{
+    "command_name": "apply",
+    "description": "Apply a patch to files and/or to the index",
+    "options": [
+        {
+            "argument": "--stat",
+            "arguments": "--stat",
+            "description": "Instead of applying the patch, output diffstat for the input. Turns off \"apply\"."
+        },
+        {
+            "argument": "--numstat",
+            "arguments": "--numstat",
+            "description": "Similar to --stat, but shows the number of added and deleted lines in decimal notation and the pathname without abbreviation, to make it more machine friendly."
+        },
+        {
+            "argument": "--summary",
+            "arguments": "--summary",
+            "description": "Instead of applying the patch, output a condensed summary of information obtained from git diff extended headers, such as creations, renames and mode changes."
+        },
+        {
+            "argument": "--check",
+            "arguments": "--check",
+            "description": "Instead of applying the patch, see if the patch is applicable to the current working tree and/or the index file and detects errors."
+        },
+        {
+            "argument": "--index",
+            "arguments": "--index",
+            "description": "When --check is in effect, or when applying the patch (which is the default when none of the options that disables it is in effect), make sure the patch is applicable to what the current index file records."
+        },
+        {
+            "argument": "--cached",
+            "arguments": "--cached",
+            "description": "Apply a patch without touching the working tree. Instead take the cached data, apply the patch, and store the result in the index without using the working tree."
+        },
+        {
+            "argument": "--intent-to-add",
+            "arguments": "--intent-to-add",
+            "description": "When applying the patch only to the working tree, mark new files to be added to the index later."
+        },
+        {
+            "argument": "--3way",
+            "arguments": "-3, --3way",
+            "description": "When the patch does not apply cleanly, fall back on 3-way merge if the patch records the identity of blobs it is supposed to apply to and we have those blobs available locally."
+        },
+        {
+            "argument": "--ours",
+            "arguments": "--ours",
+            "description": "Instead of leaving conflicts in the file, resolve conflicts favouring our side of the lines. Requires --3way."
+        },
+        {
+            "argument": "--theirs",
+            "arguments": "--theirs",
+            "description": "Instead of leaving conflicts in the file, resolve conflicts favouring their side of the lines. Requires --3way."
+        },
+        {
+            "argument": "--union",
+            "arguments": "--union",
+            "description": "Instead of leaving conflicts in the file, resolve conflicts favouring both sides of the lines. Requires --3way."
+        },
+        {
+            "argument": "--build-fake-ancestor=<file>",
+            "arguments": "--build-fake-ancestor=<file>",
+            "description": "Newer git diff output has embedded index information for each blob to help identify the original version that the patch applies to."
+        },
+        {
+            "argument": "--reverse",
+            "arguments": "-R, --reverse",
+            "description": "Apply the patch in reverse."
+        },
+        {
+            "argument": "--reject",
+            "arguments": "--reject",
+            "description": "For atomicity, git apply by default fails the whole patch and does not touch the working tree when some of the hunks do not apply. This option makes it apply the parts of the patch that are applicable, and leave the rejected hunks in corresponding *.rej files."
+        },
+        {
+            "argument": "-z",
+            "arguments": "-z",
+            "description": "When --numstat has been given, do not munge pathnames, but use a NUL-terminated machine-readable format."
+        },
+        {
+            "argument": "-p<n>",
+            "arguments": "-p<n>",
+            "description": "Remove <n> leading slashes from traditional diff paths. The default is 1."
+        },
+        {
+            "argument": "-C<n>",
+            "arguments": "-C<n>",
+            "description": "Ensure at least <n> lines of surrounding context match before and after each change. When fewer lines of surrounding context exist they all must match."
+        },
+        {
+            "argument": "--unidiff-zero",
+            "arguments": "--unidiff-zero",
+            "description": "By default, git apply expects that the patch being applied is a unified diff with at least one line of context. This provides good safety measures, but breaks down when applying a diff generated with --unified=0."
+        },
+        {
+            "argument": "--apply",
+            "arguments": "--apply",
+            "description": "If you use any of the options marked \"Turns off apply\" above, git apply reads and outputs the requested information without actually applying the patch. Give this flag after those flags to also apply the patch."
+        },
+        {
+            "argument": "--no-add",
+            "arguments": "--no-add",
+            "description": "When applying a patch, ignore additions made by the patch. This can be used to extract the common part between two files by first running diff on them and then applying the result with this option, which would apply the deletion part but not the addition part."
+        },
+        {
+            "argument": "--allow-binary-replacement",
+            "arguments": "--binary, --allow-binary-replacement",
+            "description": "Historically we did not allow binary patch applied without an explicit permission from the user, and this flag was the way to do so. Currently we always allow binary patch application, so this is a no-op."
+        },
+        {
+            "argument": "--exclude=<path-pattern>",
+            "arguments": "--exclude=<path-pattern>",
+            "description": "Don't apply changes to files matching the given path pattern. This can be useful when importing patchsets, where you want to exclude certain files or directories."
+        },
+        {
+            "argument": "--include=<path-pattern>",
+            "arguments": "--include=<path-pattern>",
+            "description": "Apply changes to files matching the given path pattern. This can be useful when importing patchsets, where you want to include certain files or directories."
+        },
+        {
+            "argument": "--ignore-whitespace",
+            "arguments": "--ignore-space-change, --ignore-whitespace",
+            "description": "When applying a patch, ignore changes in whitespace in context lines if necessary."
+        },
+        {
+            "argument": "--whitespace=<option>",
+            "arguments": "--whitespace=<option>",
+            "description": "When applying a patch, detect a new or modified line that has whitespace errors. What are considered whitespace errors is controlled by core.whitespace configuration."
+        },
+        {
+            "argument": "--inaccurate-eof",
+            "arguments": "--inaccurate-eof",
+            "description": "Under certain circumstances, some versions of diff do not correctly detect a missing new-line at the end of the file."
+        },
+        {
+            "argument": "--verbose",
+            "arguments": "-v, --verbose",
+            "description": "Report progress to stderr. By default, only a message about the current patch being applied will be printed."
+        },
+        {
+            "argument": "--quiet",
+            "arguments": "-q, --quiet",
+            "description": "Suppress stderr output. Messages about patch status and progress will not be printed."
+        },
+        {
+            "argument": "--recount",
+            "arguments": "--recount",
+            "description": "Do not trust the line counts in the hunk headers, but infer them by inspecting the patch."
+        },
+        {
+            "argument": "--directory=<root>",
+            "arguments": "--directory=<root>",
+            "description": "Prepend <root> to all filenames. If a \"-p\" argument was also passed, it is applied before prepending the new root."
+        },
+        {
+            "argument": "--unsafe-paths",
+            "arguments": "--unsafe-paths",
+            "description": "By default, a patch that affects outside the working area (either a Git controlled working tree, or the current working directory when \"git apply\" is used as a replacement of GNU patch) is rejected as a mistake."
+        },
+        {
+            "argument": "--allow-empty",
+            "arguments": "--allow-empty",
+            "description": "Don't return error for patches containing no diff. This includes empty patches and patches with commit text only."
+        },
+        {
+            "argument": "--allow-overlap",
+            "arguments": "--allow-overlap",
+            "description": "Instead of failing when the patch contains changes to submodules, attempt to apply the changes."
+        },
+        {
+            "argument": "<patch>...",
+            "arguments": "<patch>...",
+            "description": "The files to read patch from. '-' can be used to read from the standard input."
+        }
+    ]
+}
