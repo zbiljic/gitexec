@@ -410,12 +410,24 @@ func optionFlagToFieldName(option string) string {
 		return "No" + kebabToCamelCase(rest)
 	}
 
-	if len(name) == 1 {
-		r := rune(name[0])
-		if unicode.IsDigit(r) {
-			num, _ := strconv.Atoi(name)
-			name = num2words.Convert(num)
+	// Handle names that start with digits (regardless of length)
+	if len(name) > 0 && unicode.IsDigit(rune(name[0])) {
+		// Find the first non-digit character or end of string
+		i := 0
+		for i < len(name) && unicode.IsDigit(rune(name[i])) {
+			i++
 		}
+
+		// Convert the digit prefix to words
+		digitPart := name[:i]
+		remainingPart := name[i:]
+
+		if num, err := strconv.Atoi(digitPart); err == nil {
+			digitWords := num2words.Convert(num)
+			name = digitWords + remainingPart
+		}
+	} else if len(name) == 1 {
+		r := rune(name[0])
 		if len(option) > 1 && (unicode.IsLower(r) || unicode.IsUpper(r)) {
 			// get the rest of the option flag description
 			rest := strings.SplitN(option, name, 2)[1]
