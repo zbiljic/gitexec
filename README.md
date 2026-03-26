@@ -156,7 +156,7 @@ The core of this library is its code generator, which parses JSON definitions of
     ```sh
     go generate ./...
     # or
-    make generate
+    mise run generate
     ```
 3.  This will create a new `git-<command>_gen.go` file in the root directory.
 4.  Commit the new JSON file and the generated Go file (following pattern of previous commit messages), and open a pull request.
@@ -169,12 +169,19 @@ The project uses `mise` to manage development tools. To install them, run:
 make bootstrap
 ```
 
-Common development tasks are available in the `Makefile`:
+List available project tasks with:
 
-- `make tidy`: Tidy Go modules.
-- `make gofmt`: Format Go code with `gofumpt`.
-- `make lint`: Lint the source code.
-- `make pre-commit`: Run formatters and linters.
+```sh
+mise tasks
+```
+
+Common development tasks:
+
+- `mise run tidy`: Tidy Go modules.
+- `mise run fmt`: Format Go code with `gofumpt`.
+- `mise run lint`: Lint the source code and verify module files.
+- `mise run generate`: Run code generation.
+- `mise run pre-commit`: Run formatters and linters.
 
 ## License
 

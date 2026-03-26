@@ -1,0 +1,82 @@
+[tasks."go:mod:tidy"]
+description = "Run go mod tidy for each Go module in the repository"
+run = '''
+  set -e
+
+  find . -name go.mod -exec dirname {} \; | sort -u | while read -r moddir; do
+    if [ -z "$moddir" ]; then
+      continue
+    fi
+
+    compat="$(
+      cd "$moddir"
+      go mod edit -json 2>/dev/null \
+        | awk -F'"' '/"Go":/ { print $4; exit }' \
+        | tr -d '[:blank:]'
+    )"
+
+    if [ -z "$compat" ]; then
+      echo >&2 "missing Go version in ${moddir}/go.mod"
+      exit 1
+    fi
+
+    (
+      cd "$moddir"
+      go mod tidy -e -compat="$compat"
+      go mod tidy -compat="$compat"
+    )
+  done
+'''
+
+[tasks."go:mod:lint"]
+description = "Verify Go module files are tidy"
+depends = ["go:mod:tidy"]
+run = '''
+  if git status --porcelain | grep -Eq 'go\.(mod|sum|work)'; then
+    echo "go.mod, go.sum, go.work, or go.work.sum needs updating"
+    git --no-pager diff -- go.mod go.sum go.work go.work.sum || true
+    exit 1
+  fi
+'''
+
+[tasks."go:fmt"]
+description = "Format Go code with gofumpt"
+run = "gofumpt -extra -l -w ."
+
+[tasks."go:lint"]
+description = "Lint Go source code"
+run = '''
+  set -e
+  lint_config="${GOLANGCI_CONFIG:-}"
+  if [ -z "$lint_config" ]; then
+    if [ -f ".golangci.yml" ]; then
+      lint_config=".golangci.yml"
+    elif [ -f ".golangci.yaml" ]; then
+      lint_config=".golangci.yaml"
+    fi
+  fi
+
+  if [ -n "$lint_config" ]; then
+    golangci-lint run --config="$lint_config" --fix
+  else
+    golangci-lint run --fix
+  fi
+'''
+
+[tasks."go:generate"]
+description = "Generate code from Go directives"
+run = '''
+  if [ "${CI:-}" = "true" ]; then
+    go generate ./...
+  else
+    go generate -x ./...
+  fi
+'''
+
+[tasks."go:generate:clean"]
+description = "Remove generated command wrappers"
+run = "rm -f *_gen.go"
+
+[tasks."go:clean"]
+description = "Remove Go test and coverage artifacts"
+run = "rm -f *.out coverage.* *.coverprofile profile.cov"

@@ -3,37 +3,22 @@ PROJECT_ROOT := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
 # Using directory as project name.
 PROJECT_NAME := $(shell basename $(PROJECT_ROOT))
-PROJECT_MODULE := $(shell go list -m)
 
-default: help
+default: welcome
 
-ifeq ($(CI),true)
-$(info Running in a CI environment, verbose mode is disabled)
-else
-VERBOSE="true"
-endif
-
-# include per-user customization after all variables are defined
--include Makefile.local
-
-HELP_FORMAT="    \033[36m%-20s\033[0m %s\n"
-.PHONY: help
-help: ## Display this usage information
-	@echo "Valid targets:"
-	@{ \
-		echo $(MAKEFILE_LIST) \
-			| xargs grep -E '^[^ \$$]+:.*?## .*$$' -h \
-		; \
-		echo $(MAKEFILE_LIST) \
-			| xargs cat 2> /dev/null \
-			| sed -e 's/$\(eval/$\(info/' \
-			| make -f- 2> /dev/null \
-			| grep -E '^[^ ]+:.*?## .*$$' -h \
-		; \
-	} \
-		| sort \
-		| awk 'BEGIN {FS = ":.*?## "}; \
-			{printf $(HELP_FORMAT), $$1, $$2}'
+.PHONY: welcome
+welcome: tools ## Get started - shows available mise tasks
+	@echo ""
+	@echo "╔═══════════════════════════════════════════════════════════"
+	@echo "║ '$(PROJECT_NAME)'"
+	@echo "╚═══════════════════════════════════════════════════════════"
+	@echo ""
+	@echo "Available mise tasks:"
+	@echo ""
+	@mise tasks
+	@echo ""
+	@echo "-> Run tasks with:  mise run <task>"
+	@echo "-> Install deps:    make bootstrap"
 	@echo ""
 
 .PHONY: tools
@@ -50,51 +35,6 @@ tools:
 bootstrap: tools # Install all dependencies
 	@mise install
 
-GO_VERSION   := $(shell go mod edit -json | sed -En 's/"Go": "([^"]*).*/\1/p' | tr -d '[:blank:]')
-GO_WORK_DIRS := $(shell find . -name go.mod -exec dirname {} \; | sort | uniq)
-
-GO_MOD_TIDY_CMD   := go mod tidy -compat=$(GO_VERSION)
-GO_MOD_TIDY_E_CMD := go mod tidy -e -compat=$(GO_VERSION)
-
-.PHONY: go-mod-tidy-$(GO_WORK_DIRS)
-go-mod-tidy-$(GO_WORK_DIRS):
-	@cd $(PROJECT_ROOT)/$(@:go-mod-tidy-%=%) && $(GO_MOD_TIDY_E_CMD) && $(GO_MOD_TIDY_CMD)
-
-.PHONY: tidy
-tidy: go-mod-tidy-$(GO_WORK_DIRS)
-
-.PHONY: gofmt
-gofmt: tools
-gofmt: ## Format Go code
-	@mise x -- gofumpt -extra -l -w .
-
-.PHONY: lint
-lint: tools
-lint: ## Lint the source code
-	@echo "==> Linting source code..."
-	@mise x -- golangci-lint run --config=.golangci.yml --fix
-
-.PHONY: check-mod
-check-mod:
-	@echo "==> Checking Go mod..."
-	@$(MAKE) tidy
-	@if (git status --porcelain | grep -Eq "go\.(mod|sum)"); then \
-		echo go.mod or go.sum needs updating; \
-		git --no-pager diff go.mod; \
-		git --no-pager diff go.sum; \
-		exit 1; fi
-
-.PHONY: generate
-generate: gogenerate
-generate: ## Generate code
-
-.PHONY: gogenerate
-gogenerate: tools
-	@mise x -- go generate $(if $(VERBOSE),-x) ./...
-
-.PHONY: pre-commit
-pre-commit: gofmt lint check-mod
-
-.PHONY: clean-gen
-clean-gen: ## Cleans generated code
-	@rm -f $(if $(VERBOSE),-v) *_gen.go
+.PHONY: tasks
+tasks: tools ## List all available mise tasks
+	@mise tasks
