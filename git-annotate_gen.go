@@ -6,12 +6,16 @@
 package gitexec
 
 import (
+	"context"
 	"fmt"
 	"os/exec"
 )
 
 type AnnotateOptions struct {
+	// CmdDir is the working directory for the git command.
 	CmdDir string
+	// CmdContext is used to cancel the git command. If nil, the command runs without a context.
+	CmdContext context.Context
 
 	// -b
 	// Show blank SHA-1 for boundary commits. This can also be controlled via the blame.blankBoundary config option.
@@ -184,7 +188,7 @@ func AnnotateCmd(opts *AnnotateOptions) *exec.Cmd {
 		args = append(args, opts.File)
 	}
 
-	return execGit(opts.CmdDir, args)
+	return execGit(opts.CmdContext, opts.CmdDir, args)
 }
 
 func Annotate(opts *AnnotateOptions) ([]byte, error) {

@@ -6,12 +6,16 @@
 package gitexec
 
 import (
+	"context"
 	"fmt"
 	"os/exec"
 )
 
 type CloneOptions struct {
+	// CmdDir is the working directory for the git command.
 	CmdDir string
+	// CmdContext is used to cancel the git command. If nil, the command runs without a context.
+	CmdContext context.Context
 
 	// --template=<template-directory>
 	// Specify the directory from which templates will be used.
@@ -238,7 +242,7 @@ func CloneCmd(opts *CloneOptions) *exec.Cmd {
 		args = append(args, fmt.Sprintf("--bundle-uri=%s", opts.BundleUri))
 	}
 
-	return execGit(opts.CmdDir, args)
+	return execGit(opts.CmdContext, opts.CmdDir, args)
 }
 
 func Clone(opts *CloneOptions) ([]byte, error) {

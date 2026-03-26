@@ -6,12 +6,16 @@
 package gitexec
 
 import (
+	"context"
 	"fmt"
 	"os/exec"
 )
 
 type DiffOptions struct {
+	// CmdDir is the working directory for the git command.
 	CmdDir string
+	// CmdContext is used to cancel the git command. If nil, the command runs without a context.
+	CmdContext context.Context
 
 	// --no-index
 	// Compare two given paths on the filesystem. This form implies --exit-code.
@@ -615,7 +619,7 @@ func DiffCmd(opts *DiffOptions) *exec.Cmd {
 		args = append(args, opts.Path...)
 	}
 
-	return execGit(opts.CmdDir, args)
+	return execGit(opts.CmdContext, opts.CmdDir, args)
 }
 
 func Diff(opts *DiffOptions) ([]byte, error) {

@@ -6,12 +6,16 @@
 package gitexec
 
 import (
+	"context"
 	"fmt"
 	"os/exec"
 )
 
 type RevListOptions struct {
+	// CmdDir is the working directory for the git command.
 	CmdDir string
+	// CmdContext is used to cancel the git command. If nil, the command runs without a context.
+	CmdContext context.Context
 
 	// -<number>
 	// -n <number>
@@ -660,7 +664,7 @@ func RevListCmd(opts *RevListOptions) *exec.Cmd {
 		args = append(args, opts.Path...)
 	}
 
-	return execGit(opts.CmdDir, args)
+	return execGit(opts.CmdContext, opts.CmdDir, args)
 }
 
 func RevList(opts *RevListOptions) ([]byte, error) {

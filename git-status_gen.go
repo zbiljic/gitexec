@@ -6,12 +6,16 @@
 package gitexec
 
 import (
+	"context"
 	"fmt"
 	"os/exec"
 )
 
 type StatusOptions struct {
+	// CmdDir is the working directory for the git command.
 	CmdDir string
+	// CmdContext is used to cancel the git command. If nil, the command runs without a context.
+	CmdContext context.Context
 
 	// -s
 	// --short
@@ -125,7 +129,7 @@ func StatusCmd(opts *StatusOptions) *exec.Cmd {
 		args = append(args, fmt.Sprintf("--find-renames=%d", opts.FindRenames))
 	}
 
-	return execGit(opts.CmdDir, args)
+	return execGit(opts.CmdContext, opts.CmdDir, args)
 }
 
 func Status(opts *StatusOptions) ([]byte, error) {

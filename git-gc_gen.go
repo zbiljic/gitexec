@@ -6,12 +6,16 @@
 package gitexec
 
 import (
+	"context"
 	"fmt"
 	"os/exec"
 )
 
 type GcOptions struct {
+	// CmdDir is the working directory for the git command.
 	CmdDir string
+	// CmdContext is used to cancel the git command. If nil, the command runs without a context.
+	CmdContext context.Context
 
 	// --aggressive
 	// More aggressively optimize the repository at the expense of taking much more time.
@@ -97,7 +101,7 @@ func GcCmd(opts *GcOptions) *exec.Cmd {
 		args = append(args, "--keep-largest-pack")
 	}
 
-	return execGit(opts.CmdDir, args)
+	return execGit(opts.CmdContext, opts.CmdDir, args)
 }
 
 func Gc(opts *GcOptions) ([]byte, error) {

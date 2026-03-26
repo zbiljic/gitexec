@@ -6,12 +6,16 @@
 package gitexec
 
 import (
+	"context"
 	"fmt"
 	"os/exec"
 )
 
 type RebaseOptions struct {
+	// CmdDir is the working directory for the git command.
 	CmdDir string
+	// CmdContext is used to cancel the git command. If nil, the command runs without a context.
+	CmdContext context.Context
 
 	// --continue
 	// Restart the rebasing process after having resolved a merge conflict.
@@ -341,7 +345,7 @@ func RebaseCmd(opts *RebaseOptions) *exec.Cmd {
 		args = append(args, opts.Branch)
 	}
 
-	return execGit(opts.CmdDir, args)
+	return execGit(opts.CmdContext, opts.CmdDir, args)
 }
 
 func Rebase(opts *RebaseOptions) ([]byte, error) {

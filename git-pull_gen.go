@@ -6,12 +6,16 @@
 package gitexec
 
 import (
+	"context"
 	"fmt"
 	"os/exec"
 )
 
 type PullOptions struct {
+	// CmdDir is the working directory for the git command.
 	CmdDir string
+	// CmdContext is used to cancel the git command. If nil, the command runs without a context.
+	CmdContext context.Context
 
 	// -q
 	// --quiet
@@ -428,7 +432,7 @@ func PullCmd(opts *PullOptions) *exec.Cmd {
 		args = append(args, opts.Refspec)
 	}
 
-	return execGit(opts.CmdDir, args)
+	return execGit(opts.CmdContext, opts.CmdDir, args)
 }
 
 func Pull(opts *PullOptions) ([]byte, error) {

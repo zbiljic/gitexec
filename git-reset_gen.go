@@ -6,12 +6,16 @@
 package gitexec
 
 import (
+	"context"
 	"fmt"
 	"os/exec"
 )
 
 type ResetOptions struct {
+	// CmdDir is the working directory for the git command.
 	CmdDir string
+	// CmdContext is used to cancel the git command. If nil, the command runs without a context.
+	CmdContext context.Context
 
 	// -q
 	// --quiet
@@ -123,7 +127,7 @@ func ResetCmd(opts *ResetOptions) *exec.Cmd {
 		args = append(args, opts.Commit)
 	}
 
-	return execGit(opts.CmdDir, args)
+	return execGit(opts.CmdContext, opts.CmdDir, args)
 }
 
 func Reset(opts *ResetOptions) ([]byte, error) {

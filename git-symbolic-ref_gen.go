@@ -5,10 +5,16 @@
 // Reference: https://git-scm.com/docs/git-symbolic-ref
 package gitexec
 
-import "os/exec"
+import (
+	"context"
+	"os/exec"
+)
 
 type SymbolicRefOptions struct {
+	// CmdDir is the working directory for the git command.
 	CmdDir string
+	// CmdContext is used to cancel the git command. If nil, the command runs without a context.
+	CmdContext context.Context
 
 	// -d
 	// --delete
@@ -67,7 +73,7 @@ func SymbolicRefCmd(opts *SymbolicRefOptions) *exec.Cmd {
 		args = append(args, opts.Ref)
 	}
 
-	return execGit(opts.CmdDir, args)
+	return execGit(opts.CmdContext, opts.CmdDir, args)
 }
 
 func SymbolicRef(opts *SymbolicRefOptions) ([]byte, error) {

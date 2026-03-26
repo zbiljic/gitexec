@@ -6,12 +6,16 @@
 package gitexec
 
 import (
+	"context"
 	"fmt"
 	"os/exec"
 )
 
 type LsRemoteOptions struct {
+	// CmdDir is the working directory for the git command.
 	CmdDir string
+	// CmdContext is used to cancel the git command. If nil, the command runs without a context.
+	CmdContext context.Context
 
 	// -b
 	// --branches
@@ -95,7 +99,7 @@ func LsRemoteCmd(opts *LsRemoteOptions) *exec.Cmd {
 		args = append(args, opts.Patterns...)
 	}
 
-	return execGit(opts.CmdDir, args)
+	return execGit(opts.CmdContext, opts.CmdDir, args)
 }
 
 func LsRemote(opts *LsRemoteOptions) ([]byte, error) {

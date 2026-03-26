@@ -6,12 +6,16 @@
 package gitexec
 
 import (
+	"context"
 	"fmt"
 	"os/exec"
 )
 
 type RevParseOptions struct {
+	// CmdDir is the working directory for the git command.
 	CmdDir string
+	// CmdContext is used to cancel the git command. If nil, the command runs without a context.
+	CmdContext context.Context
 
 	// --parseopt
 	// Use git rev-parse in option parsing mode (see PARSEOPT section below).
@@ -320,7 +324,7 @@ func RevParseCmd(opts *RevParseOptions) *exec.Cmd {
 		args = append(args, opts.Arg...)
 	}
 
-	return execGit(opts.CmdDir, args)
+	return execGit(opts.CmdContext, opts.CmdDir, args)
 }
 
 func RevParse(opts *RevParseOptions) ([]byte, error) {
