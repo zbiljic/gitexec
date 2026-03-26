@@ -11,6 +11,7 @@ func run(cmd *exec.Cmd) ([]byte, error) {
 	}
 
 	withSysProcAttr(cmd)
+	withCancel(cmd)
 
 	out, err := cmd.CombinedOutput()
 	if err != nil {

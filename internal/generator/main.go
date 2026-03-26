@@ -153,6 +153,7 @@ func (g *Generator) generateCode(cmd CommandDoc, tags []string) {
 	f.PackageComment(fmt.Sprintf("Reference: https://git-scm.com/docs/git-%s", cmd.CommandName))
 
 	// Add imports
+	f.ImportName("context", "context")
 	f.ImportName("errors", "errors")
 	f.ImportName("fmt", "fmt")
 	f.ImportName("os/exec", "exec")
@@ -160,7 +161,10 @@ func (g *Generator) generateCode(cmd CommandDoc, tags []string) {
 	// Generate options struct
 	structName := execFuncName + "Options"
 	structFields := []jen.Code{
+		jen.Comment("CmdDir is the working directory for the git command."),
 		jen.Id("CmdDir").String(),
+		jen.Comment("CmdContext is used to cancel the git command. If nil, the command runs without a context."),
+		jen.Id("CmdContext").Qual("context", "Context"),
 		jen.Line(),
 	}
 
@@ -203,7 +207,13 @@ func (g *Generator) generateCode(cmd CommandDoc, tags []string) {
 	// Add the remaining statements - updated to use execGit
 	cmdStmts = append(cmdStmts,
 		jen.Line(),
-		jen.Return(jen.Id("execGit").Call(jen.Id("opts").Dot("CmdDir"), jen.Id("args"))),
+		jen.Return(
+			jen.Id("execGit").Call(
+				jen.Id("opts").Dot("CmdContext"),
+				jen.Id("opts").Dot("CmdDir"),
+				jen.Id("args"),
+			),
+		),
 	)
 
 	// Generate the function

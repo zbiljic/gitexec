@@ -1,9 +1,17 @@
 package gitexec
 
-import "os/exec"
+import (
+	"context"
+	"os/exec"
+)
 
-func execGit(dir string, args []string) *exec.Cmd {
-	cmd := exec.Command("git", args...)
+func execGit(ctx context.Context, dir string, args []string) *exec.Cmd {
+	var cmd *exec.Cmd
+	if ctx == nil {
+		cmd = exec.Command("git", args...)
+	} else {
+		cmd = exec.CommandContext(ctx, "git", args...)
+	}
 	cmd.Dir = dir
 	return cmd
 }

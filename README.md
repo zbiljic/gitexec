@@ -22,6 +22,7 @@ Interacting with Git from a Go application often means manually constructing arg
 - **Comprehensive Option Structs**: Each command's `Options` struct mirrors the available command-line flags, complete with documentation.
 - **Simple and Consistent API**: All generated commands follow the same `gitexec.Command(opts)` pattern.
 - **Cross-Platform**: Handles process management details for Unix and Windows systems.
+- **Context Support**: Any generated command can be canceled by setting `CmdContext`, and arbitrary subcommands can use `gitexec.CommandContext()`.
 - **Generic Command Execution**: A `gitexec.Command()` function is available for running arbitrary or not-yet-generated Git commands.
 
 ## Installation
@@ -93,9 +94,44 @@ func main() {
 }
 ```
 
+### Example: Cancel a running command
+
+This example cancels a `git fetch` if it takes longer than 10 seconds.
+
+```go
+package main
+
+import (
+	"context"
+	"errors"
+	"log"
+	"time"
+
+	"github.com/zbiljic/gitexec"
+)
+
+func main() {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	output, err := gitexec.Fetch(&gitexec.FetchOptions{
+		CmdDir:     "/path/to/your/repo",
+		CmdContext: ctx,
+		All:        true,
+	})
+	if err != nil {
+		if errors.Is(err, context.DeadlineExceeded) {
+			log.Printf("git fetch timed out\nOutput: %s", string(output))
+			return
+		}
+		log.Fatalf("git fetch failed: %v\nOutput: %s", err, string(output))
+	}
+}
+```
+
 ### Example: Running an arbitrary command
 
-For commands that are not yet generated, or to pass arguments in a more dynamic way, you can use the generic `gitexec.Command` function. This example runs `git config core.filemode false` inside a repository.
+For commands that are not yet generated, or to pass arguments in a more dynamic way, you can use the generic `gitexec.Command` or `gitexec.CommandContext` functions. This example runs `git config core.filemode false` inside a repository.
 
 ```go
 package main

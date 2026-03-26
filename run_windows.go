@@ -14,3 +14,5 @@ func withSysProcAttr(cmd *exec.Cmd) {
 		CreationFlags: windows.DETACHED_PROCESS,
 	}
 }
+
+func withCancel(cmd *exec.Cmd) {}
